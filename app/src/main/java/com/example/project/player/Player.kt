@@ -7,6 +7,9 @@ class Player(val index: Int) {
     private val i: Int = 0;
     private var isWinner: Boolean = false;
     private var isLoser: Boolean = false;
+    fun getCards(x: Card) {
+        hand.add(x)
+    }
     fun placeCard() {
         hand.removeAt(i)
     }
