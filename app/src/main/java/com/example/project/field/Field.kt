@@ -38,7 +38,7 @@ class Field(private val numOfPlayers: Int) {
         }
     }
     fun getPlayerCards(i: Int): String {
-        val t = p[i].cardsInHand().toString();
+        val t = p[i].cardsInHand();
         return t;
     }
 }

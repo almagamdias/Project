@@ -7,8 +7,8 @@ class Player(val index: Int) {
     private val i: Int = 0;
     private var isWinner: Boolean = false;
     private var isLoser: Boolean = false;
-    fun cardsInHand(): MutableList<Card> {
-        return hand;
+    fun cardsInHand(): String {
+        return hand.toString();
     }
     fun getCards(x: Card) {
         hand.add(x)
