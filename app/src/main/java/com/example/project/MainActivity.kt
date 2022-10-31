@@ -5,11 +5,9 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.project.field.Field
-import com.example.project.player.Player
 
 class MainActivity : AppCompatActivity() {
-    private val p = mutableListOf<Player>();
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint("MissingInflatedId", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val field = Field(2);
@@ -19,5 +17,11 @@ class MainActivity : AppCompatActivity() {
         tx.text = field.getPlayerCards(0);
         val tx2: TextView = findViewById(R.id.text2)
         tx2.text = field.getPlayerCards(1);
+        val tx3: TextView = findViewById(R.id.text3)
+        tx3.text = field.getSuit();
+        val tx4: TextView = findViewById(R.id.text4)
+        tx4.text = field.showDeck();
+        val tx5: TextView = findViewById(R.id.text5)
+        tx5.text = field.countSuit(0) + " " + field.countSuit(1);
     }
 }

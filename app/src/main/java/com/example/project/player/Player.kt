@@ -7,11 +7,14 @@ class Player(val index: Int) {
     private val i: Int = 0;
     private var isWinner: Boolean = false;
     private var isLoser: Boolean = false;
-    fun cardsInHand(): String {
+    fun stringHand(): String {
         return hand.toString();
     }
     fun getCards(x: Card) {
         hand.add(x)
+    }
+    fun cardsInHand(j: Int): Card {
+        return hand[j];
     }
     fun placeCard() {
         hand.removeAt(i)

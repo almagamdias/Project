@@ -7,6 +7,7 @@ class Field(private val numOfPlayers: Int) {
     private val f = mutableListOf<Card>();
     private val deck = mutableListOf<Card>();
     private val p = mutableListOf<Player>();
+    private val head = mutableListOf<Card>();
     fun showDeck(): String {
         return deck.toString();
     }
@@ -34,13 +35,28 @@ class Field(private val numOfPlayers: Int) {
                     deck.removeAt(i * 2 + j);
                 }
             }
+            head.add(deck[6*numOfPlayers]);
+            deck.removeAt(6*numOfPlayers);
+            head[0].setSuit();
         }
         createDeck();
         deck.shuffle();
         distribution();
     }
+    fun getSuit(): String {
+        return head[0].toString();
+    }
+    fun countSuit(i: Int): String {
+        var x = 0;
+        for (j in 0 until 6) {
+            if (p[i].cardsInHand(j).isHeadSuit()) {
+                x++;
+            }
+        }
+        return "$x";
+    }
     fun getPlayerCards(i: Int): String {
-        val t = p[i].cardsInHand();
+        val t = p[i].stringHand();
         return t;
     }
 }

@@ -1,6 +1,9 @@
 package com.example.project.cards
 
 data class Card(val suit: Int, var nom: Int) {
+    companion object {
+        private var headSuit: Int = -1;
+    }
     override fun toString(): String {
         var realSuit = "";
         var realNom = "";
@@ -22,5 +25,11 @@ data class Card(val suit: Int, var nom: Int) {
             8 -> realNom = "A";
         }
         return realSuit + realNom;
+    }
+    fun setSuit() {
+        headSuit = suit;
+    }
+    fun isHeadSuit(): Boolean {
+        return suit == headSuit;
     }
 }
