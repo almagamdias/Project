@@ -6,11 +6,14 @@ import com.example.project.player.Player
 class Field(private val numOfPlayers: Int) {
     private val f = mutableListOf<Card>();
     private val deck = mutableListOf<Card>();
-    private val p = mutableListOf<Player>()
+    private val p = mutableListOf<Player>();
+    fun showDeck(): String {
+        return deck.toString();
+    }
     fun createGame() {
         fun createDeck() {
             for (i in 0 until 9) {
-                for (j in 0 until 3) {
+                for (j in 0 until 4) {
                     val c = Card(i, j);
                     deck.add(c);
                 }
@@ -31,5 +34,11 @@ class Field(private val numOfPlayers: Int) {
         createDeck();
         deck.shuffle();
         distribution();
+    }
+    fun getPlayerCards(): String {
+        var t: String = "";
+        for (i in 0 until numOfPlayers)
+            t += p[i].cardsInHand().toString() + " ";
+        return t;
     }
 }
