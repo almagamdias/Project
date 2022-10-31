@@ -14,12 +14,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val field = Field(2);
         field.createGame();
-        field.createDeck();
-        field.distribution();
         setContentView(R.layout.activity_main)
         val tx: TextView = findViewById(R.id.text)
-        tx.setText(field.getPlayerCards(0));
+        tx.text = field.getPlayerCards(0);
         val tx2: TextView = findViewById(R.id.text2)
-        tx2.setText(field.getPlayerCards(1));
+        tx2.text = field.getPlayerCards(1);
     }
 }
