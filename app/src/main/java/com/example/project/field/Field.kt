@@ -11,8 +11,8 @@ class Field(private val numOfPlayers: Int) {
         return deck.toString();
     }
     fun createDeck() {
-        for (i in 0 until 9) {
-            for (j in 0 until 4) {
+        for (i in 0 until 4) {
+            for (j in 0 until 9) {
                 val c = Card(i, j);
                 deck.add(c);
             }
