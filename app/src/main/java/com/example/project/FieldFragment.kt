@@ -6,11 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
+import androidx.navigation.Navigation
 import com.example.project.field.Field
 
 class FieldFragment : Fragment() {
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,6 +30,10 @@ class FieldFragment : Fragment() {
         tx4.text = field.showDeck()
         val tx5: TextView = bind.findViewById(R.id.text5)
         tx5.text = field.countSuit(0) + " " + field.countSuit(1)
+        val bito = bind?.findViewById<Button>(R.id.bito)
+        bito?.setOnClickListener(
+            Navigation.createNavigateOnClickListener(R.id.action_fieldFragment_to_loserFragment, null)
+        )
         return bind
     }
 }

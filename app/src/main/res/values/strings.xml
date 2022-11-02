@@ -4,4 +4,6 @@
     <string name="bito">Bito</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="loser">You loser!! HA! HA! HA!!</string>
+    <string name="again">again</string>
+    <string name="menu">menu</string>
 </resources>

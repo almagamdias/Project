@@ -9,7 +9,14 @@
         android:id="@+id/loserFragment"
         android:name="com.example.project.LoserFragment"
         android:label="fragment_loser"
-        tools:layout="@layout/fragment_loser" />
+        tools:layout="@layout/fragment_loser" >
+        <action
+            android:id="@+id/action_loserFragment_to_fieldFragment"
+            app:destination="@id/fieldFragment" />
+        <action
+            android:id="@+id/action_loserFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
+    </fragment>
     <fragment
         android:id="@+id/menuFragment"
         android:name="com.example.project.MenuFragment"
