@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav"
+    app:startDestination="@id/menuFragment">
+
+    <fragment
+        android:id="@+id/loserFragment"
+        android:name="com.example.project.LoserFragment"
+        android:label="fragment_loser"
+        tools:layout="@layout/fragment_loser" />
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="com.example.project.MenuFragment"
+        android:label="fragment_menu"
+        tools:layout="@layout/fragment_menu" >
+        <action
+            android:id="@+id/action_menuFragment_to_fieldFragment"
+            app:destination="@id/fieldFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fieldFragment"
+        android:name="com.example.project.FieldFragment"
+        android:label="FieldFragment" >
+        <action
+            android:id="@+id/action_fieldFragment_to_loserFragment"
+            app:destination="@id/loserFragment" />
+    </fragment>
+</navigation>
