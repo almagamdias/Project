@@ -30,16 +30,28 @@ class FieldFragment : Fragment() {
         tx3.text = field.getSuit()
         val input: EditText = bind.findViewById(R.id.input)
         val tx5: TextView = bind.findViewById(R.id.text5)
-        val index = 0
         input.setOnKeyListener(object : View.OnKeyListener {
             override fun onKey(v: View?, keyCode: Int, event: KeyEvent): Boolean {
                 if (event.action !=KeyEvent.ACTION_DOWN)
                     return true
                 when (keyCode) {
                     KeyEvent.KEYCODE_ENTER -> {
-                        field.placeInField(0, index)
-                        tx5.text = field.getField()
-                        tx.text = field.getPlayerCards(0)
+                        if (input.text.toString() != "") {
+                            try {
+                                val index = Integer.parseInt(input.text.toString()) - 1
+                                if (index >= 0 && index < field.handSize(0)) {
+                                    field.placeInField(0, index)
+                                    tx5.text = field.getField()
+                                    tx.text = field.getPlayerCards(0)
+                                }
+                                else
+                                    tx5.text = "Invalid integer!"
+                            }catch (e: Exception) {
+                                tx5.text = "Null type!"
+                            }
+                        }
+                        else
+                            tx5.text = "Enter an integer!"
                     }
                 }
                 return false
@@ -50,8 +62,5 @@ class FieldFragment : Fragment() {
             Navigation.createNavigateOnClickListener(R.id.action_fieldFragment_to_loserFragment, null)
         )
         return bind
-    }
-    private fun toInteger(s: String): Int {
-        return s.toInt()
     }
 }

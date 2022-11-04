@@ -12,6 +12,9 @@ class Player() {
     fun getCards(x: Card) {
         hand.add(x)
     }
+    fun handSize(): Int {
+        return hand.size
+    }
     fun cardsInHand(i: Int): Card {
         return hand[i]
     }

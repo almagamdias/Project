@@ -58,6 +58,9 @@ class Field(private val numOfPlayers: Int) {
         }
         return "$x"
     }
+    fun handSize(a: Int): Int {
+        return p[a].handSize()
+    }
     fun getPlayerCards(i: Int): String {
         return p[i].stringHand()
     }
