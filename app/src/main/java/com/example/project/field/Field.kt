@@ -71,7 +71,9 @@ class Field(private val numOfPlayers: Int) {
     fun defend(a: Int) {
         var canDefend = false
         for (j in 0 until p[a].handSize()) {
-            if (p[a].cardsInHand(j).getSuit() == f[f.size - 1].getSuit()) {
+            if ((p[a].cardsInHand(j).getSuit() == f[f.size - 1].getSuit())
+                && (p[a].cardsInHand(j).getNom() > f[f.size - 1].getNom())
+                || ((p[a].cardsInHand(j).isHeadSuit()) && !f[f.size - 1].isHeadSuit())) {
                 canDefend = true
                 f.add(p[a].cardsInHand(j))
                 p[a].placeCard(j)
