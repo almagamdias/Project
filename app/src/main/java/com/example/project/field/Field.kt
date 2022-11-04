@@ -64,7 +64,7 @@ class Field(private val numOfPlayers: Int) {
     fun getPlayerCards(i: Int): String {
         return p[i].stringHand()
     }
-    fun placeInField(a: Int, i: Int) {
+    fun canBeat(a: Int, i: Int): Boolean {
         fun check() {
             if(f.isNotEmpty()) {
                 for (j in 0 until p[a].handSize()) {
@@ -77,7 +77,10 @@ class Field(private val numOfPlayers: Int) {
             }
         }
         check()
-        if (p[a].cardsInHand(i).isAllowed() || f.isEmpty()) {
+        return f.isEmpty() || p[a].cardsInHand(i).isAllowed()
+    }
+    fun placeInField(a: Int, i: Int) {
+        if (canBeat(a, i)) {
             f.add(p[a].cardsInHand(i))
             p[a].placeCard(i)
         }

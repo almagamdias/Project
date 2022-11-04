@@ -29,6 +29,7 @@ class FieldFragment : Fragment() {
         val tx3: TextView = bind.findViewById(R.id.text3)
         tx3.text = field.getSuit()
         val input: EditText = bind.findViewById(R.id.input)
+        val tx4: TextView = bind.findViewById(R.id.text4)
         val tx5: TextView = bind.findViewById(R.id.text5)
         input.setOnKeyListener(object : View.OnKeyListener {
             override fun onKey(v: View?, keyCode: Int, event: KeyEvent): Boolean {
@@ -40,21 +41,26 @@ class FieldFragment : Fragment() {
                             try {
                                 val index = Integer.parseInt(input.text.toString()) - 1
                                 if (index >= 0 && index < field.handSize(0)) {
-                                    field.placeInField(0, index)
-                                    tx.text = field.getPlayerCards(0)
-                                    tx5.text = field.getField()
-                                    field.defend(1)
-                                    tx2.text = field.getPlayerCards(1)
-                                    tx5.text = field.getField()
+                                    if (field.canBeat(0, index)) {
+                                        tx4.text = ""
+                                        field.placeInField(0, index)
+                                        tx.text = field.getPlayerCards(0)
+                                        tx5.text = field.getField()
+                                        field.defend(1)
+                                        tx2.text = field.getPlayerCards(1)
+                                        tx5.text = field.getField()
+                                    }
+                                    else
+                                        tx4.text = "You cannot place!"
                                 }
                                 else
-                                    tx5.text = "Invalid integer!"
+                                    tx4.text = "Invalid integer!"
                             }catch (e: Exception) {
-                                tx5.text = "Null type!"
+                                tx4.text = "Null type!"
                             }
                         }
                         else
-                            tx5.text = "Enter an integer!"
+                            tx4.text = "Enter an integer!"
                     }
                 }
                 return false
