@@ -46,6 +46,9 @@ class Field(private val numOfPlayers: Int) {
     fun getSuit(): String {
         return head[0].toString();
     }
+    fun getField(): String {
+        return f.toString();
+    }
     fun countSuit(i: Int): String {
         var x = 0;
         for (j in 0 until 6) {
@@ -58,5 +61,9 @@ class Field(private val numOfPlayers: Int) {
     fun getPlayerCards(i: Int): String {
         val t = p[i].stringHand();
         return t;
+    }
+    fun placeInField(a: Int, i: Int) {
+        f.add(p[a].cardsInHand(i))
+        p[a].placeCard(i)
     }
 }

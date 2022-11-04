@@ -6,4 +6,5 @@
     <string name="loser">You loser!! HA! HA! HA!!</string>
     <string name="again">again</string>
     <string name="menu">menu</string>
+    <string name="hand">Enter a index</string>
 </resources>

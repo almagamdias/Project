@@ -4,7 +4,6 @@ import com.example.project.cards.Card
 
 class Player(val index: Int) {
     private val hand = mutableListOf<Card>();
-    private val i: Int = 0;
     private var isWinner: Boolean = false;
     private var isLoser: Boolean = false;
     fun stringHand(): String {
@@ -13,10 +12,10 @@ class Player(val index: Int) {
     fun getCards(x: Card) {
         hand.add(x)
     }
-    fun cardsInHand(j: Int): Card {
-        return hand[j];
+    fun cardsInHand(i: Int): Card {
+        return hand[i];
     }
-    fun placeCard() {
+    fun placeCard(i: Int) {
         hand.removeAt(i)
     }
     fun takeCards(fc: MutableList<Card>) {
