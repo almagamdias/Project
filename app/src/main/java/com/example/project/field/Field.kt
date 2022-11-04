@@ -65,8 +65,22 @@ class Field(private val numOfPlayers: Int) {
         return p[i].stringHand()
     }
     fun placeInField(a: Int, i: Int) {
-        f.add(p[a].cardsInHand(i))
-        p[a].placeCard(i)
+        fun check() {
+            if(f.isNotEmpty()) {
+                for (j in 0 until p[a].handSize()) {
+                    for (k in 0 until f.size) {
+                        if (f[k].getNom() == p[a].cardsInHand(j).getNom()) {
+                            p[a].cardsInHand(j).setAllowedToTrue()
+                        }
+                    }
+                }
+            }
+        }
+        check()
+        if (p[a].cardsInHand(i).isAllowed() || f.isEmpty()) {
+            f.add(p[a].cardsInHand(i))
+            p[a].placeCard(i)
+        }
     }
     fun defend(a: Int) {
         var canDefend = false
@@ -82,6 +96,7 @@ class Field(private val numOfPlayers: Int) {
         }
         if (!canDefend) {
             p[a].takeCards(f)
+            f.clear()
         }
     }
 }

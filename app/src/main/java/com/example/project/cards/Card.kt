@@ -4,6 +4,7 @@ class Card(private val suit: Int, private val nom: Int) {
     companion object {
         private var headSuit: Int = -1
     }
+    private var isAllowed = false
     override fun toString(): String {
         var realSuit = ""
         var realNom = ""
@@ -37,5 +38,11 @@ class Card(private val suit: Int, private val nom: Int) {
     }
     fun getNom(): Int {
         return nom
+    }
+    fun isAllowed(): Boolean {
+        return isAllowed
+    }
+    fun setAllowedToTrue() {
+        isAllowed = true
     }
 }
