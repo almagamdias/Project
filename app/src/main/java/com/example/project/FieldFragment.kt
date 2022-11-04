@@ -41,8 +41,11 @@ class FieldFragment : Fragment() {
                                 val index = Integer.parseInt(input.text.toString()) - 1
                                 if (index >= 0 && index < field.handSize(0)) {
                                     field.placeInField(0, index)
-                                    tx5.text = field.getField()
                                     tx.text = field.getPlayerCards(0)
+                                    tx5.text = field.getField()
+                                    field.defend(1)
+                                    tx2.text = field.getPlayerCards(1)
+                                    tx5.text = field.getField()
                                 }
                                 else
                                     tx5.text = "Invalid integer!"

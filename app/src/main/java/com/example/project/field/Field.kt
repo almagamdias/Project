@@ -68,4 +68,13 @@ class Field(private val numOfPlayers: Int) {
         f.add(p[a].cardsInHand(i))
         p[a].placeCard(i)
     }
+    fun defend(a: Int) {
+        for (j in 0 until p[a].handSize()) {
+            if(p[a].cardsInHand(j).getSuit() == f[f.size-1].getSuit()) {
+                f.add(p[a].cardsInHand(j))
+                p[a].placeCard(j)
+                break
+            }
+        }
+    }
 }
