@@ -2,7 +2,8 @@ package com.example.project.player
 
 import com.example.project.cards.Card
 
-class Player() {
+class Player {
+    private var attacker: Int = 0
     private val hand = mutableListOf<Card>()
     private var isWinner: Boolean = false
     private var isLoser: Boolean = false
@@ -23,6 +24,12 @@ class Player() {
     }
     fun takeCards(fc: MutableList<Card>) {
         hand.addAll(fc)
+    }
+    fun nextMove() {
+        attacker = if(attacker==1)
+            0
+        else
+            1
     }
     fun winner() {
         isWinner = true
