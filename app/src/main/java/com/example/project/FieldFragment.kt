@@ -31,9 +31,11 @@ class FieldFragment : Fragment() {
         val input: EditText = bind.findViewById(R.id.input)
         val tx4: TextView = bind.findViewById(R.id.text4)
         val tx5: TextView = bind.findViewById(R.id.text5)
-        field.placeBot(1)
-        tx2.text = field.getPlayerCards(1)
-        tx5.text = field.getField()
+        if (field.isDefender(0)) {
+            field.placeBot(1)
+            tx2.text = field.getPlayerCards(1)
+            tx5.text = field.getField()
+        }
         input.setOnKeyListener(object : View.OnKeyListener {
             override fun onKey(v: View?, keyCode: Int, event: KeyEvent): Boolean {
                 if (event.action !=KeyEvent.ACTION_DOWN)
@@ -46,20 +48,11 @@ class FieldFragment : Fragment() {
                                 if (index >= 0 && index < field.handSize(0)) {
                                     if (field.canBeat(0, index)) {
                                         tx4.text = ""
-                                        if (!field.isDefender(0)) {
-                                            field.placeInField(0, index)
-                                            tx.text = field.getPlayerCards(0)
-                                            field.placeBot(1)
-                                            tx2.text = field.getPlayerCards(1)
-                                            tx5.text = field.getField()
-                                        }
-                                        else {
-                                            field.placeInField(0, index)
-                                            tx.text = field.getPlayerCards(0)
-                                            field.placeBot(1)
-                                            tx2.text = field.getPlayerCards(1)
-                                            tx5.text = field.getField()
-                                        }
+                                        field.placeInField(0, index)
+                                        field.placeBot(1)
+                                        tx.text = field.getPlayerCards(0)
+                                        tx2.text = field.getPlayerCards(1)
+                                        tx5.text = field.getField()
                                     }
                                     else
                                         tx4.text = "You cannot place!"
@@ -80,6 +73,9 @@ class FieldFragment : Fragment() {
         val bito = bind.findViewById<Button>(R.id.bito)
         bito.setOnClickListener {
             field.bito()
+            if (field.isDefender(0)) {
+                field.placeBot(1)
+            }
             tx.text = field.getPlayerCards(0)
             tx5.text = field.getField()
             tx2.text = field.getPlayerCards(1)
