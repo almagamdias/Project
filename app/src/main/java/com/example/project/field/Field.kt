@@ -8,13 +8,6 @@ class Field(private val numOfPlayers: Int) {
     private val deck = mutableListOf<Card>()
     private val p = mutableListOf<Player>()
     private val head = mutableListOf<Card>()
-    fun showDeck(): String {
-        return deck.toString()
-    }
-    fun numOfPlayers(): String {
-        val x = p.size
-        return "$x"
-    }
     fun createGame() {
         fun createDeck() {
             for (i in 0 until 4) {
@@ -49,16 +42,15 @@ class Field(private val numOfPlayers: Int) {
         return head[0].toString()
     }
     fun getField(): String {
-        return f.toString()
-    }
-    fun countSuit(i: Int): String {
-        var x = 0
-        for (j in 0 until 6) {
-            if (p[i].cardsInHand(j).isHeadSuit()) {
-                x++
+        if (deck.isEmpty()) {
+            for (i in 0 until numOfPlayers) {
+                if (p[i].handSize() == 0) {
+                    p[i].winner()
+                    return "You WIN!!"
+                }
             }
         }
-        return "$x"
+        return f.toString()
     }
     fun handSize(a: Int): Int {
         return p[a].handSize()
