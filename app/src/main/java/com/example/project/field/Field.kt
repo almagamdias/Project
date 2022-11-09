@@ -38,6 +38,7 @@ class Field(private val numOfPlayers: Int) {
             head.add(deck[6*numOfPlayers])
             deck.removeAt(6*numOfPlayers)
             head[0].setSuit()
+            deck.add(deck.size-1, head[0])
             p[1].setAttacker()
         }
         createDeck()
@@ -97,6 +98,11 @@ class Field(private val numOfPlayers: Int) {
             p[a].placeCard(i)
         }
     }
+    fun takeAllCards(a: Int) {
+        p[a].takeCards(f)
+        f.clear()
+        addCard()
+    }
     fun isDefender(a: Int): Boolean {
         return p[a].isAttacker()==0
     }
@@ -125,14 +131,12 @@ class Field(private val numOfPlayers: Int) {
             if (!canDefend) {
                 p[a].takeCards(f)
                 f.clear()
-                bito()
+                addCard()
             }
         }
         else {
             var place = false
             for (i in 0 until handSize(a)) {
-                if (p[a].cardsInHand(i).isHeadSuit())
-                    continue
                 if (canBeat(a, i)){
                     place = true
                     f.add(p[a].cardsInHand(i))
@@ -151,9 +155,12 @@ class Field(private val numOfPlayers: Int) {
             }
         }
         f.clear()
+        addCard()
         nextMove()
-        for (i in 0 until numOfPlayers) {
-            if (p[i].isAttacker()==1) {
+    }
+    private fun addCard() {
+        fun fromDeck(i: Int) {
+            if (deck.isNotEmpty()) {
                 while (p[i].handSize() < 6) {
                     p[i].getCards(deck[0])
                     deck.removeAt(0)
@@ -161,11 +168,13 @@ class Field(private val numOfPlayers: Int) {
             }
         }
         for (i in 0 until numOfPlayers) {
+            if (p[i].isAttacker()==1) {
+                fromDeck(i)
+            }
+        }
+        for (i in 0 until numOfPlayers) {
             if (p[i].isAttacker()==0) {
-                while (p[i].handSize() < 6) {
-                    p[i].getCards(deck[0])
-                    deck.removeAt(0)
-                }
+                fromDeck(i)
             }
         }
         for (i in 0 until numOfPlayers) {

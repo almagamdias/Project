@@ -72,7 +72,10 @@ class FieldFragment : Fragment() {
         })
         val bito = bind.findViewById<Button>(R.id.bito)
         bito.setOnClickListener {
-            field.bito()
+            if (field.isDefender(0))
+                field.takeAllCards(0)
+            else
+                field.bito()
             if (field.isDefender(0)) {
                 field.placeBot(1)
             }
