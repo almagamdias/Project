@@ -1,5 +1,4 @@
 package com.example.project.field
-
 import com.example.project.cards.Card
 import com.example.project.player.Player
 
@@ -33,10 +32,15 @@ class Field(private val numOfPlayers: Int) {
             head[0].setSuit()
             deck.add(deck.size-1, head[0])
             p[1].setAttacker()
+            p[0].clear()
+            p[1].clear()
         }
         createDeck()
         deck.shuffle()
         distribution()
+    }
+    fun isWinner(a: Int): Boolean {
+        return p[a].isWinner()
     }
     fun getSuit(): String {
         return head[0].toString()
@@ -46,7 +50,7 @@ class Field(private val numOfPlayers: Int) {
             for (i in 0 until numOfPlayers) {
                 if (p[i].handSize() == 0) {
                     p[i].winner()
-                    return "You WIN!!"
+                    return "You WIN!!!"
                 }
             }
         }
@@ -77,12 +81,17 @@ class Field(private val numOfPlayers: Int) {
                             || (p[a].cardsInHand(j).isHeadSuit() && !f[f.size - 1].isHeadSuit())) {
                             p[a].cardsInHand(j).setAllowedToTrue()
                         }
+                        else
+                            p[a].cardsInHand(j).setAllowedToFalse()
                     }
                 }
             }
         }
         check()
         return f.isEmpty() || p[a].cardsInHand(i).isAllowed()
+    }
+    fun emptyField(): Boolean {
+        return f.isEmpty()
     }
     fun placeInField(a: Int, i: Int) {
         if (canBeat(a, i)) {
@@ -115,7 +124,7 @@ class Field(private val numOfPlayers: Int) {
                 for (j in 0 until p[a].handSize()) {
                     if (p[a].cardsInHand(j).isHeadSuit() && !f[f.size - 1].isHeadSuit()) {
                         canDefend = true
-                        placeInField(a,j)
+                        placeInField(a, j)
                         break
                     }
                 }
@@ -128,12 +137,24 @@ class Field(private val numOfPlayers: Int) {
         }
         else {
             var place = false
+            var noHead = false
             for (i in 0 until handSize(a)) {
-                if (canBeat(a, i)){
+                if (canBeat(a, i) && !p[a].cardsInHand(i).isHeadSuit()){
                     place = true
+                    noHead = true
                     f.add(p[a].cardsInHand(i))
                     p[a].placeCard(i)
                     break
+                }
+            }
+            if (!noHead) {
+                for (i in 0 until handSize(a)) {
+                    if (canBeat(a, i)) {
+                        place = true
+                        f.add(p[a].cardsInHand(i))
+                        p[a].placeCard(i)
+                        break
+                    }
                 }
             }
             if (!place)

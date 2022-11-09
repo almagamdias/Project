@@ -6,7 +6,6 @@ class Player {
     private var attacker: Int = 0
     private val hand = mutableListOf<Card>()
     private var isWinner: Boolean = false
-    private var isLoser: Boolean = false
     fun stringHand(): String {
         return hand.toString()
     }
@@ -37,10 +36,13 @@ class Player {
     fun isAttacker(): Int {
         return attacker
     }
+    fun isWinner(): Boolean {
+        return isWinner
+    }
     fun winner() {
         isWinner = true
     }
-    fun loser() {
-        isLoser = true
+    fun clear() {
+        isWinner = false
     }
 }

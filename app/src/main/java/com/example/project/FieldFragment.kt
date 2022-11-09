@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.example.project.field.Field
 
 
@@ -74,14 +75,23 @@ class FieldFragment : Fragment() {
         bito.setOnClickListener {
             if (field.isDefender(0))
                 field.takeAllCards(0)
-            else
-                field.bito()
-            if (field.isDefender(0)) {
-                field.placeBot(1)
+            else if (field.isWinner(0)) {
+                Navigation.createNavigateOnClickListener(R.id.action_fieldFragment_to_loserFragment, null)
             }
+            else {
+                if (!field.emptyField())
+                    field.bito()
+                else
+                    tx4.text = "You cannot bito!"
+            }
+            if (field.isDefender(0))
+                field.placeBot(1)
             tx.text = field.getPlayerCards(0)
-            tx5.text = field.getField()
             tx2.text = field.getPlayerCards(1)
+            tx5.text = field.getField()
+        }
+        if (field.isWinner(1)) {
+            Navigation.createNavigateOnClickListener(R.id.action_fieldFragment_to_loserFragment, null)
         }
         return bind
     }
