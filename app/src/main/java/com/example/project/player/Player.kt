@@ -19,6 +19,9 @@ class Player {
     fun cardsInHand(i: Int): Card {
         return hand[i]
     }
+    fun sortCard() {
+        return hand.sortWith(compareBy({it.getSuit()},{it.getNom()}))
+    }
     fun placeCard(i: Int) {
         hand.removeAt(i)
     }
@@ -30,6 +33,12 @@ class Player {
             0
         else
             1
+    }
+    fun setAttacker() {
+        attacker = 1
+    }
+    fun isAttacker(): Int {
+        return attacker
     }
     fun winner() {
         isWinner = true

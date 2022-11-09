@@ -38,6 +38,7 @@ class Field(private val numOfPlayers: Int) {
             head.add(deck[6*numOfPlayers])
             deck.removeAt(6*numOfPlayers)
             head[0].setSuit()
+            p[0].setAttacker()
         }
         createDeck()
         deck.shuffle()
@@ -62,6 +63,7 @@ class Field(private val numOfPlayers: Int) {
         return p[a].handSize()
     }
     fun getPlayerCards(i: Int): String {
+        p[i].sortCard()
         return p[i].stringHand()
     }
     fun canBeat(a: Int, i: Int): Boolean {
@@ -80,26 +82,37 @@ class Field(private val numOfPlayers: Int) {
         return f.isEmpty() || p[a].cardsInHand(i).isAllowed()
     }
     fun placeInField(a: Int, i: Int) {
-        if (canBeat(a, i)) {
+        if (canBeat(a, i) || p[a].isAttacker()==0) {
             f.add(p[a].cardsInHand(i))
             p[a].placeCard(i)
         }
     }
     fun defend(a: Int) {
-        var canDefend = false
-        for (j in 0 until p[a].handSize()) {
-            if ((p[a].cardsInHand(j).getSuit() == f[f.size - 1].getSuit())
-                && (p[a].cardsInHand(j).getNom() > f[f.size - 1].getNom())
-                || ((p[a].cardsInHand(j).isHeadSuit()) && !f[f.size - 1].isHeadSuit())) {
-                canDefend = true
-                f.add(p[a].cardsInHand(j))
-                p[a].placeCard(j)
-                break
+        if (p[a].isAttacker()==0) {
+            var canDefend = false
+            var noHead = false
+            for (j in 0 until p[a].handSize()) {
+                if ((p[a].cardsInHand(j).getSuit() == f[f.size - 1].getSuit())
+                    && (p[a].cardsInHand(j).getNom() > f[f.size - 1].getNom())) {
+                    canDefend = true
+                    noHead = true
+                    placeInField(a,j)
+                    break
+                }
             }
-        }
-        if (!canDefend) {
-            p[a].takeCards(f)
-            f.clear()
+            if (!noHead) {
+                for (j in 0 until p[a].handSize()) {
+                    if (p[a].cardsInHand(j).isHeadSuit() && !f[f.size - 1].isHeadSuit()) {
+                        canDefend = true
+                        placeInField(a,j)
+                        break
+                    }
+                }
+            }
+            if (!canDefend) {
+                p[a].takeCards(f)
+                f.clear()
+            }
         }
     }
 }
