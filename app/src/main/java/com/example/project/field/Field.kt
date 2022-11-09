@@ -129,7 +129,19 @@ class Field(private val numOfPlayers: Int) {
             }
         }
         else {
-            placeInField(a, 1)
+            var place = false
+            for (i in 0 until handSize(a)) {
+                if (p[a].cardsInHand(i).isHeadSuit())
+                    continue
+                if (canBeat(a, i)){
+                    place = true
+                    f.add(p[a].cardsInHand(i))
+                    p[a].placeCard(i)
+                    break
+                }
+            }
+            if (!place)
+                bito()
         }
     }
     fun bito() {

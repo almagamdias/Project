@@ -54,11 +54,10 @@ class FieldFragment : Fragment() {
                                             tx5.text = field.getField()
                                         }
                                         else {
-                                            field.placeBot(1)
-                                            tx2.text = field.getPlayerCards(1)
-                                            tx5.text = field.getField()
                                             field.placeInField(0, index)
                                             tx.text = field.getPlayerCards(0)
+                                            field.placeBot(1)
+                                            tx2.text = field.getPlayerCards(1)
                                             tx5.text = field.getField()
                                         }
                                     }
