@@ -45,4 +45,7 @@ class Card(private val suit: Int, private val nom: Int) {
     fun setAllowedToTrue() {
         isAllowed = true
     }
+    fun setAllowedToFalse() {
+        isAllowed = false
+    }
 }

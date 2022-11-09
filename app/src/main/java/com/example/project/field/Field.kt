@@ -38,7 +38,7 @@ class Field(private val numOfPlayers: Int) {
             head.add(deck[6*numOfPlayers])
             deck.removeAt(6*numOfPlayers)
             head[0].setSuit()
-            p[0].setAttacker()
+            p[1].setAttacker()
         }
         createDeck()
         deck.shuffle()
@@ -69,9 +69,19 @@ class Field(private val numOfPlayers: Int) {
     fun canBeat(a: Int, i: Int): Boolean {
         fun check() {
             if(f.isNotEmpty()) {
-                for (j in 0 until p[a].handSize()) {
-                    for (k in 0 until f.size) {
-                        if (f[k].getNom() == p[a].cardsInHand(j).getNom()) {
+                if (p[a].isAttacker()==1) {
+                    for (j in 0 until p[a].handSize()) {
+                        for (k in 0 until f.size) {
+                            if (f[k].getNom() == p[a].cardsInHand(j).getNom())
+                                p[a].cardsInHand(j).setAllowedToTrue()
+                        }
+                    }
+                }
+                else {
+                    for (j in 0 until p[a].handSize()) {
+                        if (((p[a].cardsInHand(j).getSuit() == f[f.size - 1].getSuit())
+                            && (p[a].cardsInHand(j).getNom() > f[f.size - 1].getNom()))
+                            || (p[a].cardsInHand(j).isHeadSuit() && !f[f.size - 1].isHeadSuit())) {
                             p[a].cardsInHand(j).setAllowedToTrue()
                         }
                     }
@@ -82,12 +92,15 @@ class Field(private val numOfPlayers: Int) {
         return f.isEmpty() || p[a].cardsInHand(i).isAllowed()
     }
     fun placeInField(a: Int, i: Int) {
-        if (canBeat(a, i) || p[a].isAttacker()==0) {
+        if (canBeat(a, i)) {
             f.add(p[a].cardsInHand(i))
             p[a].placeCard(i)
         }
     }
-    fun defend(a: Int) {
+    fun isDefender(a: Int): Boolean {
+        return p[a].isAttacker()==0
+    }
+    fun placeBot(a: Int) {
         if (p[a].isAttacker()==0) {
             var canDefend = false
             var noHead = false
@@ -112,6 +125,40 @@ class Field(private val numOfPlayers: Int) {
             if (!canDefend) {
                 p[a].takeCards(f)
                 f.clear()
+                bito()
+            }
+        }
+        else {
+            placeInField(a, 1)
+        }
+    }
+    fun bito() {
+        fun nextMove() {
+            for (i in 0 until numOfPlayers) {
+                p[i].setAttacker()
+            }
+        }
+        f.clear()
+        nextMove()
+        for (i in 0 until numOfPlayers) {
+            if (p[i].isAttacker()==1) {
+                while (p[i].handSize() < 6) {
+                    p[i].getCards(deck[0])
+                    deck.removeAt(0)
+                }
+            }
+        }
+        for (i in 0 until numOfPlayers) {
+            if (p[i].isAttacker()==0) {
+                while (p[i].handSize() < 6) {
+                    p[i].getCards(deck[0])
+                    deck.removeAt(0)
+                }
+            }
+        }
+        for (i in 0 until numOfPlayers) {
+            for (j in 0 until handSize(i)) {
+                p[i].cardsInHand(j).setAllowedToFalse()
             }
         }
     }

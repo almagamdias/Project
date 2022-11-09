@@ -16,8 +16,8 @@ class MenuFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val bind = inflater.inflate(R.layout.fragment_menu, container, false)
-        val play = bind?.findViewById<Button>(R.id.play)
-        play?.setOnClickListener(
+        val play = bind.findViewById<Button>(R.id.play)
+        play.setOnClickListener(
             Navigation.createNavigateOnClickListener(R.id.action_menuFragment_to_fieldFragment, null)
         )
         return bind

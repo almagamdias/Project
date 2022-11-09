@@ -28,14 +28,11 @@ class Player {
     fun takeCards(fc: MutableList<Card>) {
         hand.addAll(fc)
     }
-    fun nextMove() {
-        attacker = if(attacker==1)
-            0
-        else
-            1
-    }
     fun setAttacker() {
-        attacker = 1
+        attacker = if (attacker==0)
+            1
+        else
+            0
     }
     fun isAttacker(): Int {
         return attacker
