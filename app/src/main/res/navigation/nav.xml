@@ -33,5 +33,20 @@
         <action
             android:id="@+id/action_fieldFragment_to_loserFragment"
             app:destination="@id/loserFragment" />
+        <action
+            android:id="@+id/action_fieldFragment_to_winnerFragment"
+            app:destination="@id/winnerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/winnerFragment"
+        android:name="com.example.project.WinnerFragment"
+        android:label="fragment_winner"
+        tools:layout="@layout/fragment_winner" >
+        <action
+            android:id="@+id/action_winnerFragment_to_fieldFragment"
+            app:destination="@id/fieldFragment" />
+        <action
+            android:id="@+id/action_winnerFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
     </fragment>
 </navigation>

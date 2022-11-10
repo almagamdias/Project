@@ -7,4 +7,6 @@
     <string name="again">again</string>
     <string name="menu">menu</string>
     <string name="hand">Enter a index</string>
+    <string name="your_turn">Your turn!</string>
+    <string name="you_win">You Win!!!</string>
 </resources>

@@ -10,7 +10,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.example.project.field.Field
 
 
@@ -32,10 +32,12 @@ class FieldFragment : Fragment() {
         val input: EditText = bind.findViewById(R.id.input)
         val tx4: TextView = bind.findViewById(R.id.text4)
         val tx5: TextView = bind.findViewById(R.id.text5)
+        val bito = bind.findViewById<Button>(R.id.bito)
+        val navigation = findNavController()
         if (field.isDefender(0)) {
+            bito.text = "Take"
             field.placeBot(1)
             tx2.text = field.getPlayerCards(1)
-            tx5.text = field.getField()
         }
         input.setOnKeyListener(object : View.OnKeyListener {
             override fun onKey(v: View?, keyCode: Int, event: KeyEvent): Boolean {
@@ -53,14 +55,19 @@ class FieldFragment : Fragment() {
                                         field.placeBot(1)
                                         tx.text = field.getPlayerCards(0)
                                         tx2.text = field.getPlayerCards(1)
-                                        tx5.text = field.getField()
+                                        if (!field.emptyField())
+                                            tx5.text = field.getField()
+                                        else {
+                                            tx5.text = "Your Turn!"
+                                            bito.text = "Bito"
+                                        }
                                     }
                                     else
                                         tx4.text = "You cannot place!"
                                 }
                                 else
                                     tx4.text = "Invalid integer!"
-                            }catch (e: Exception) {
+                            } catch (e: Exception) {
                                 tx4.text = "Null type!"
                             }
                         }
@@ -71,16 +78,19 @@ class FieldFragment : Fragment() {
                 return false
             }
         })
-        val bito = bind.findViewById<Button>(R.id.bito)
         bito.setOnClickListener {
-            if (field.isDefender(0))
+            if (field.isWinner(1))
+                navigation.navigate(R.id.action_fieldFragment_to_loserFragment)
+            else if (field.isWinner(0))
+                navigation.navigate(R.id.action_fieldFragment_to_winnerFragment)
+            if (field.isDefender(0)) {
                 field.takeAllCards(0)
-            else if (field.isWinner(0)) {
-                Navigation.createNavigateOnClickListener(R.id.action_fieldFragment_to_loserFragment, null)
             }
             else {
-                if (!field.emptyField())
+                if (!field.emptyField()) {
                     field.bito()
+                    bito.text = "Take"
+                }
                 else
                     tx4.text = "You cannot bito!"
             }
@@ -89,9 +99,6 @@ class FieldFragment : Fragment() {
             tx.text = field.getPlayerCards(0)
             tx2.text = field.getPlayerCards(1)
             tx5.text = field.getField()
-        }
-        if (field.isWinner(1)) {
-            Navigation.createNavigateOnClickListener(R.id.action_fieldFragment_to_loserFragment, null)
         }
         return bind
     }
