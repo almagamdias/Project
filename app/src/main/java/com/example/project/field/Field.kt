@@ -63,7 +63,14 @@ class Field(private val numOfPlayers: Int) {
     }
     fun getPlayerCards(i: Int): String {
         p[i].sortCard()
-        return p[i].stringHand()
+        var x = ""
+        if (i==0)
+            return p[i].stringHand()
+        else
+            for (j in 0 until p[i].handSize()) {
+                x += "X  "
+            }
+            return x
     }
     fun canBeat(a: Int, i: Int): Boolean {
         fun check() {
