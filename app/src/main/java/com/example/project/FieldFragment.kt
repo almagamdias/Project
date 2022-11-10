@@ -32,13 +32,17 @@ class FieldFragment : Fragment() {
         val input: EditText = bind.findViewById(R.id.input)
         val tx4: TextView = bind.findViewById(R.id.text4)
         val tx5: TextView = bind.findViewById(R.id.text5)
+        val tx6: TextView = bind.findViewById(R.id.text6)
         val bito = bind.findViewById<Button>(R.id.bito)
         val navigation = findNavController()
         if (field.isDefender(0)) {
             bito.text = "Take"
+            tx6.text = "Defend!"
             field.placeBot(1)
             tx2.text = field.getPlayerCards(1)
         }
+        else
+            tx6.text = "Your turn!"
         input.setOnKeyListener(object : View.OnKeyListener {
             override fun onKey(v: View?, keyCode: Int, event: KeyEvent): Boolean {
                 if (event.action !=KeyEvent.ACTION_DOWN)
@@ -55,10 +59,9 @@ class FieldFragment : Fragment() {
                                         field.placeBot(1)
                                         tx.text = field.getPlayerCards(0)
                                         tx2.text = field.getPlayerCards(1)
-                                        if (!field.emptyField())
-                                            tx5.text = field.getField()
-                                        else {
-                                            tx5.text = "Your Turn!"
+                                        tx5.text = field.getField()
+                                        if (field.isDefender(1)) {
+                                            tx6.text = "Your Turn!"
                                             bito.text = "Bito"
                                         }
                                     }
@@ -90,6 +93,7 @@ class FieldFragment : Fragment() {
                 if (!field.emptyField()) {
                     field.bito()
                     bito.text = "Take"
+                    tx6.text = "Defend!"
                 }
                 else
                     tx4.text = "You cannot bito!"
