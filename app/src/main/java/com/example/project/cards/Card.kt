@@ -15,15 +15,15 @@ class Card(private val suit: Int, private val nom: Int) {
             3 -> realSuit = "♦"
         }
         when (nom) {
-            0 -> realNom = "6"
-            1 -> realNom = "7"
-            2 -> realNom = "8"
-            3 -> realNom = "9"
+            0 -> realNom = "6 "
+            1 -> realNom = "7 "
+            2 -> realNom = "8 "
+            3 -> realNom = "9 "
             4 -> realNom = "10"
-            5 -> realNom = "J"
-            6 -> realNom = "Q"
-            7 -> realNom = "K"
-            8 -> realNom = "A"
+            5 -> realNom = "J "
+            6 -> realNom = "Q "
+            7 -> realNom = "K "
+            8 -> realNom = "A "
         }
         return realSuit + realNom
     }

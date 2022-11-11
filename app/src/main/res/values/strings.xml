@@ -10,4 +10,5 @@
     <string name="your_turn">Your turn!</string>
     <string name="you_win">You Win!!!</string>
     <string name="hint">Enter to place card</string>
+    <string name="history">History of bito cards</string>
 </resources>

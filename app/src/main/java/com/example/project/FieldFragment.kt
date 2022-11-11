@@ -24,29 +24,33 @@ class FieldFragment : Fragment() {
         val field = Field(2)
         field.createGame()
         val bind = inflater.inflate(R.layout.fragment_field, container, false)
-        val tx: TextView = bind.findViewById(R.id.text)
-        val tx2: TextView = bind.findViewById(R.id.text2)
-        val tx3: TextView = bind.findViewById(R.id.text3)
+        val history: TextView = bind.findViewById(R.id.history)
+        val opponent: TextView = bind.findViewById(R.id.opponent)
+        val you: TextView = bind.findViewById(R.id.you)
+        val headSuit: TextView = bind.findViewById(R.id.head_suit)
         val input: EditText = bind.findViewById(R.id.input)
-        val tx4: TextView = bind.findViewById(R.id.text4)
-        val tx5: TextView = bind.findViewById(R.id.text5)
-        val tx6: TextView = bind.findViewById(R.id.text6)
+        val hint: TextView = bind.findViewById(R.id.hint)
+        val field1: TextView = bind.findViewById(R.id.field1)
+        val field2: TextView = bind.findViewById(R.id.field2)
+        val turn: TextView = bind.findViewById(R.id.turn)
         val bito = bind.findViewById<Button>(R.id.bito)
         val navigation = findNavController()
         fun update() {
-            tx.text = field.getPlayerCards(1)
-            tx2.text = field.getPlayerCards(0)
-            tx5.text = field.getField()
-            tx3.text = field.getSuit() + " " + field.cardsLeft()
-            if (field.emptyDeck()) {
-                tx3.setTextColor(Color.WHITE)
-            }
+            if (!field.emptyHistory())
+                history.text = field.history()
+            opponent.text = field.getPlayerCards(1)
+            you.text = field.getPlayerCards(0)
+            field1.text = field.getField(0)
+            field2.text = field.getField(1)
+            headSuit.text = field.getSuit() + " " + field.cardsLeft()
+            if (field.emptyDeck())
+                headSuit.setTextColor(Color.WHITE)
             if (field.isWinner(1) || field.isWinner(0))
                 bito.text = "GO!"
         }
         if (field.isDefender(0)) {
             bito.text = "Take"
-            tx6.text = "Defend!"
+            turn.text = "Defend!"
             field.placeBot(1)
         }
         update()
@@ -61,33 +65,33 @@ class FieldFragment : Fragment() {
                                 val index = Integer.parseInt(input.text.toString()) - 1
                                 if (index >= 0 && index < field.handSize(0) && !field.isWinner(1)) {
                                     if (field.canBeat(0, index)) {
-                                        tx4.text = ""
+                                        hint.text = ""
                                         field.placeInField(0, index)
                                         field.placeBot(1)
                                         if (field.isDefender(1)) {
                                             if (field.emptyField()) {
                                                 if (field.isTaking())
-                                                    tx4.text = "Opponent has taken cards!"
+                                                    hint.text = "Opponent has taken cards!"
                                                 else
-                                                    tx4.text = "Opponent has bito!"
+                                                    hint.text = "Opponent has bito!"
                                             }
-                                            tx6.text = "Your turn!"
+                                            turn.text = "Your turn!"
                                             bito.text = "Bito"
                                         }
                                         input.text.clear()
                                         update()
                                     }
                                     else
-                                        tx4.text = "You cannot place!"
+                                        hint.text = "You cannot place!"
                                 }
                                 else
-                                    tx4.text = "Invalid integer!"
+                                    hint.text = "Invalid integer!"
                             } catch (e: Exception) {
-                                tx4.text = "Null type!"
+                                hint.text = "Null type!"
                             }
                         }
                         else
-                            tx4.text = "Enter an integer!"
+                            hint.text = "Enter an integer!"
                     }
                 }
                 return false
@@ -105,10 +109,10 @@ class FieldFragment : Fragment() {
                 if (!field.emptyField()) {
                     field.bito()
                     bito.text = "Take"
-                    tx6.text = "Defend!"
+                    turn.text = "Defend!"
                 }
                 else
-                    tx4.text = "You cannot bito!"
+                    hint.text = "You cannot bito!"
             }
             if (field.isDefender(0))
                 field.placeBot(1)

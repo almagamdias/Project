@@ -7,6 +7,7 @@ class Field(private val numOfPlayers: Int) {
     private val deck = mutableListOf<Card>()
     private val p = mutableListOf<Player>()
     private val head = mutableListOf<Card>()
+    private val bito = mutableListOf<Card>()
     private var alarm = false
     fun createGame() {
         fun createDeck() {
@@ -48,24 +49,48 @@ class Field(private val numOfPlayers: Int) {
         val l = deck.size
         return " [$l]"
     }
-    fun getField(): String {
+    fun getField(e: Int): String {
+        var x1 = ""
+        var x2 = ""
         if (deck.isEmpty()) {
             if (p[0].handSize() == 0 && p[1].handSize() > 0) {
                 p[0].winner()
-                return "You WIN!!!"
+                return if(e==0)
+                    "You WIN!!!"
+                else
+                    ""
             } else if (p[1].handSize() == 0 && p[0].handSize() > 0) {
                 p[1].winner()
-                return "You LOSE!!!"
+                return if(e==0)
+                    "You LOSE!!!"
+                else
+                    ""
             } else if (p[1].handSize() == 0 && p[0].handSize() == 0) {
                 p[0].winner()
                 p[1].winner()
-                return "Draw!"
+                return if(e==0)
+                    "DRAW!!!"
+                else
+                    ""
             }
         }
         return if (f.isEmpty())
             " "
-        else
-            f.toString()
+        else {
+            for (i in 0 until f.size) {
+                if (i % 2 == 0)
+                    x1+=f[i].toString()+" "
+                else
+                    x2+=f[i].toString()+" "
+            }
+            if (e==0)
+                x1
+            else
+                x2
+        }
+    }
+    private fun formatted(c: String): String {
+        return c.replace(",", "").replace("[", "").replace("]", "")
     }
     fun handSize(a: Int): Int {
         return p[a].handSize()
@@ -74,7 +99,7 @@ class Field(private val numOfPlayers: Int) {
         p[i].sortCard()
         var x = ""
         if (i==0)
-            return p[i].stringHand()
+            return formatted(p[i].stringHand())
         else
             for (j in 0 until p[i].handSize()) {
                 x += "X  "
@@ -129,11 +154,6 @@ class Field(private val numOfPlayers: Int) {
         p[a].takeCards(f)
         f.clear()
         addCard()
-        for (i in 0 until numOfPlayers) {
-            for (j in 0 until p[i].handSize()) {
-                p[i].cardsInHand(j).setAllowedToFalse()
-            }
-        }
     }
     fun isDefender(a: Int): Boolean {
         return p[a].isAttacker()==0
@@ -176,7 +196,7 @@ class Field(private val numOfPlayers: Int) {
                     break
                 }
             }
-            if (!noHead && deck.isEmpty()) {
+            if (!noHead && deck.size < 4) {
                 for (i in 0 until handSize(a)) {
                     if (canBeat(a, i)) {
                         place = true
@@ -190,20 +210,22 @@ class Field(private val numOfPlayers: Int) {
                 bito()
         }
     }
+    fun emptyHistory(): Boolean {
+        return bito.isEmpty()
+    }
+    fun history(): String {
+        return formatted(bito.toString())
+    }
     fun bito() {
         fun nextMove() {
             for (i in 0 until numOfPlayers) {
                 p[i].setAttacker()
             }
         }
+        bito.addAll(f)
         f.clear()
         addCard()
         nextMove()
-        for (i in 0 until numOfPlayers) {
-            for (j in 0 until p[i].handSize()) {
-                p[i].cardsInHand(j).setAllowedToFalse()
-            }
-        }
     }
     private fun addCard() {
         fun fromDeck(i: Int) {
@@ -220,6 +242,11 @@ class Field(private val numOfPlayers: Int) {
         for (i in 0 until numOfPlayers) {
             if (p[i].isAttacker() == 0) {
                 fromDeck(i)
+            }
+        }
+        for (i in 0 until numOfPlayers) {
+            for (j in 0 until p[i].handSize()) {
+                p[i].cardsInHand(j).setAllowedToFalse()
             }
         }
     }
