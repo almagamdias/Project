@@ -7,6 +7,7 @@ class Field(private val numOfPlayers: Int) {
     private val deck = mutableListOf<Card>()
     private val p = mutableListOf<Player>()
     private val head = mutableListOf<Card>()
+    private var alarm = false
     fun createGame() {
         fun createDeck() {
             for (i in 0 until 4) {
@@ -31,12 +32,7 @@ class Field(private val numOfPlayers: Int) {
             deck.removeAt(6*numOfPlayers)
             head[0].setSuit()
             deck.add(deck.size-1, head[0])
-            if (p[1].isWinner())
-                p[1].setAttacker()
-            else
-                p[0].setAttacker()
-            p[0].clear()
-            p[1].clear()
+            p[0].setAttacker()
         }
         createDeck()
         deck.shuffle()
@@ -48,6 +44,10 @@ class Field(private val numOfPlayers: Int) {
     fun getSuit(): String {
         return head[0].toString()
     }
+    fun cardsLeft(): String {
+        val l = deck.size
+        return " [$l]"
+    }
     fun getField(): String {
         if (deck.isEmpty()) {
             if (p[0].handSize() == 0 && p[1].handSize() > 0) {
@@ -56,10 +56,16 @@ class Field(private val numOfPlayers: Int) {
             } else if (p[1].handSize() == 0 && p[0].handSize() > 0) {
                 p[1].winner()
                 return "You LOSE!!!"
-            } else if (p[1].handSize() == 0 && p[0].handSize() == 0)
+            } else if (p[1].handSize() == 0 && p[0].handSize() == 0) {
+                p[0].winner()
+                p[1].winner()
                 return "Draw!"
+            }
         }
-        return f.toString()
+        return if (f.isEmpty())
+            " "
+        else
+            f.toString()
     }
     fun handSize(a: Int): Int {
         return p[a].handSize()
@@ -105,13 +111,21 @@ class Field(private val numOfPlayers: Int) {
     fun emptyField(): Boolean {
         return f.isEmpty()
     }
+    fun emptyDeck(): Boolean {
+        return deck.isEmpty()
+    }
     fun placeInField(a: Int, i: Int) {
+        alarm = false
         if (canBeat(a, i)) {
             f.add(p[a].cardsInHand(i))
             p[a].placeCard(i)
         }
     }
+    fun isTaking(): Boolean {
+        return alarm
+    }
     fun takeAllCards(a: Int) {
+        alarm = true
         p[a].takeCards(f)
         f.clear()
         addCard()

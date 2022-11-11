@@ -42,7 +42,4 @@ class Player {
     fun winner() {
         isWinner = true
     }
-    fun clear() {
-        isWinner = false
-    }
 }

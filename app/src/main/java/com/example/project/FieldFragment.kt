@@ -1,6 +1,7 @@
 package com.example.project
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.LayoutInflater
@@ -15,7 +16,7 @@ import com.example.project.field.Field
 
 
 class FieldFragment : Fragment() {
-    @SuppressLint("SetTextI18n", "MissingInflatedId")
+    @SuppressLint("SetTextI18n", "MissingInflatedId", "ShowToast")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -26,7 +27,6 @@ class FieldFragment : Fragment() {
         val tx: TextView = bind.findViewById(R.id.text)
         val tx2: TextView = bind.findViewById(R.id.text2)
         val tx3: TextView = bind.findViewById(R.id.text3)
-        tx3.text = field.getSuit()
         val input: EditText = bind.findViewById(R.id.input)
         val tx4: TextView = bind.findViewById(R.id.text4)
         val tx5: TextView = bind.findViewById(R.id.text5)
@@ -34,9 +34,15 @@ class FieldFragment : Fragment() {
         val bito = bind.findViewById<Button>(R.id.bito)
         val navigation = findNavController()
         fun update() {
-            tx.text = field.getPlayerCards(0)
-            tx2.text = field.getPlayerCards(1)
+            tx.text = field.getPlayerCards(1)
+            tx2.text = field.getPlayerCards(0)
             tx5.text = field.getField()
+            tx3.text = field.getSuit() + " " + field.cardsLeft()
+            if (field.emptyDeck()) {
+                tx3.setTextColor(Color.WHITE)
+            }
+            if (field.isWinner(1) || field.isWinner(0))
+                bito.text = "GO!"
         }
         if (field.isDefender(0)) {
             bito.text = "Take"
@@ -53,18 +59,23 @@ class FieldFragment : Fragment() {
                         if (input.text.toString() != "") {
                             try {
                                 val index = Integer.parseInt(input.text.toString()) - 1
-                                if (index >= 0 && index < field.handSize(0)) {
+                                if (index >= 0 && index < field.handSize(0) && !field.isWinner(1)) {
                                     if (field.canBeat(0, index)) {
                                         tx4.text = ""
                                         field.placeInField(0, index)
                                         field.placeBot(1)
-                                        update()
                                         if (field.isDefender(1)) {
-                                            if (field.emptyField())
-                                                tx4.text = "Opponent is Bito!"
+                                            if (field.emptyField()) {
+                                                if (field.isTaking())
+                                                    tx4.text = "Opponent has taken cards!"
+                                                else
+                                                    tx4.text = "Opponent has bito!"
+                                            }
                                             tx6.text = "Your turn!"
                                             bito.text = "Bito"
                                         }
+                                        input.text.clear()
+                                        update()
                                     }
                                     else
                                         tx4.text = "You cannot place!"
