@@ -31,7 +31,10 @@ class Field(private val numOfPlayers: Int) {
             deck.removeAt(6*numOfPlayers)
             head[0].setSuit()
             deck.add(deck.size-1, head[0])
-            p[0].setAttacker()
+            if (p[1].isWinner())
+                p[1].setAttacker()
+            else
+                p[0].setAttacker()
             p[0].clear()
             p[1].clear()
         }
@@ -111,8 +114,7 @@ class Field(private val numOfPlayers: Int) {
     fun takeAllCards(a: Int) {
         p[a].takeCards(f)
         f.clear()
-        if (deck.isNotEmpty())
-            addCard()
+        addCard()
         for (i in 0 until numOfPlayers) {
             for (j in 0 until p[i].handSize()) {
                 p[i].cardsInHand(j).setAllowedToFalse()
@@ -145,15 +147,7 @@ class Field(private val numOfPlayers: Int) {
                 }
             }
             if (!canDefend) {
-                p[a].takeCards(f)
-                f.clear()
-                if (deck.isNotEmpty())
-                    addCard()
-                for (i in 0 until numOfPlayers) {
-                    for (j in 0 until p[i].handSize()) {
-                        p[i].cardsInHand(j).setAllowedToFalse()
-                    }
-                }
+                takeAllCards(a)
             }
         }
         else {
@@ -189,8 +183,7 @@ class Field(private val numOfPlayers: Int) {
             }
         }
         f.clear()
-        if (deck.isNotEmpty())
-            addCard()
+        addCard()
         nextMove()
         for (i in 0 until numOfPlayers) {
             for (j in 0 until p[i].handSize()) {
@@ -200,18 +193,18 @@ class Field(private val numOfPlayers: Int) {
     }
     private fun addCard() {
         fun fromDeck(i: Int) {
-            while (p[i].handSize() < 6) {
+            while (p[i].handSize() < 6 && deck.isNotEmpty()) {
                 p[i].getCards(deck[0])
                 deck.removeAt(0)
             }
         }
         for (i in 0 until numOfPlayers) {
-            if (p[i].isAttacker()==1) {
+            if (p[i].isAttacker() == 1) {
                 fromDeck(i)
             }
         }
         for (i in 0 until numOfPlayers) {
-            if (p[i].isAttacker()==0) {
+            if (p[i].isAttacker() == 0) {
                 fromDeck(i)
             }
         }

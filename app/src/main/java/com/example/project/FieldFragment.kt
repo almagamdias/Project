@@ -24,9 +24,7 @@ class FieldFragment : Fragment() {
         field.createGame()
         val bind = inflater.inflate(R.layout.fragment_field, container, false)
         val tx: TextView = bind.findViewById(R.id.text)
-        tx.text = field.getPlayerCards(0)
         val tx2: TextView = bind.findViewById(R.id.text2)
-        tx2.text = field.getPlayerCards(1)
         val tx3: TextView = bind.findViewById(R.id.text3)
         tx3.text = field.getSuit()
         val input: EditText = bind.findViewById(R.id.input)
@@ -35,14 +33,17 @@ class FieldFragment : Fragment() {
         val tx6: TextView = bind.findViewById(R.id.text6)
         val bito = bind.findViewById<Button>(R.id.bito)
         val navigation = findNavController()
+        fun update() {
+            tx.text = field.getPlayerCards(0)
+            tx2.text = field.getPlayerCards(1)
+            tx5.text = field.getField()
+        }
         if (field.isDefender(0)) {
             bito.text = "Take"
             tx6.text = "Defend!"
             field.placeBot(1)
-            tx2.text = field.getPlayerCards(1)
         }
-        else
-            tx6.text = "Your turn!"
+        update()
         input.setOnKeyListener(object : View.OnKeyListener {
             override fun onKey(v: View?, keyCode: Int, event: KeyEvent): Boolean {
                 if (event.action !=KeyEvent.ACTION_DOWN)
@@ -57,11 +58,11 @@ class FieldFragment : Fragment() {
                                         tx4.text = ""
                                         field.placeInField(0, index)
                                         field.placeBot(1)
-                                        tx.text = field.getPlayerCards(0)
-                                        tx2.text = field.getPlayerCards(1)
-                                        tx5.text = field.getField()
+                                        update()
                                         if (field.isDefender(1)) {
-                                            tx6.text = "Your Turn!"
+                                            if (field.emptyField())
+                                                tx4.text = "Opponent is Bito!"
+                                            tx6.text = "Your turn!"
                                             bito.text = "Bito"
                                         }
                                     }
@@ -100,9 +101,7 @@ class FieldFragment : Fragment() {
             }
             if (field.isDefender(0))
                 field.placeBot(1)
-            tx.text = field.getPlayerCards(0)
-            tx2.text = field.getPlayerCards(1)
-            tx5.text = field.getField()
+            update()
         }
         return bind
     }
