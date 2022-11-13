@@ -3,9 +3,9 @@
     <string name="play">Play</string>
     <string name="bito">Bito</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="loser">You loser!! HA! HA! HA!!</string>
-    <string name="again">again</string>
-    <string name="menu">menu</string>
+    <string name="loser">You loser!!</string>
+    <string name="again">Again</string>
+    <string name="menu">Menu</string>
     <string name="hand">Enter a index</string>
     <string name="your_turn">Your turn!</string>
     <string name="you_win">You Win!!!</string>

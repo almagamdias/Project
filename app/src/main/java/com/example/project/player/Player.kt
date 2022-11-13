@@ -2,12 +2,23 @@ package com.example.project.player
 
 import com.example.project.cards.Card
 
-class Player {
+class Player(private val i: Int) {
     private var attacker: Int = 0
     private val hand = mutableListOf<Card>()
     private var isWinner: Boolean = false
+    private fun formatted(c: String): String {
+        return c.replace(",", "").replace("[", "").replace("]", "")
+    }
     fun stringHand(): String {
-        return hand.toString()
+        hand.sortWith(compareBy({it.getSuit()},{it.getNom()}))
+        var x = ""
+        if (i==0)
+            return formatted(hand.toString())
+        else
+            for (j in 0 until hand.size) {
+                x += "X  "
+            }
+        return x
     }
     fun getCards(x: Card) {
         hand.add(x)
@@ -17,9 +28,6 @@ class Player {
     }
     fun cardsInHand(i: Int): Card {
         return hand[i]
-    }
-    fun sortCard() {
-        return hand.sortWith(compareBy({it.getSuit()},{it.getNom()}))
     }
     fun placeCard(i: Int) {
         hand.removeAt(i)
