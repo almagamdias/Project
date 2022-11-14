@@ -17,13 +17,6 @@ class WinnerFragment : Fragment() {
     ): View? {
         val bind = inflater.inflate(R.layout.fragment_winner, container, false)
         val again = bind?.findViewById<Button>(R.id.again)
-        again?.setOnClickListener(
-            Navigation.createNavigateOnClickListener(R.id.action_winnerFragment_to_fieldFragment, null)
-        )
-        val menu = bind?.findViewById<Button>(R.id.menu)
-        menu?.setOnClickListener(
-            Navigation.createNavigateOnClickListener(R.id.action_winnerFragment_to_menuFragment, null)
-        )
         return bind
     }
 }

@@ -20,6 +20,12 @@ class Player(private val i: Int) {
             }
         return x
     }
+    fun clearHand() {
+        hand.clear()
+    }
+    fun clearAttack() {
+        attacker = 0
+    }
     fun getCards(x: Card) {
         hand.add(x)
     }
@@ -48,6 +54,10 @@ class Player(private val i: Int) {
         return isWinner
     }
     fun winner() {
+        clearAttack()
         isWinner = true
+    }
+    fun clear() {
+        isWinner = false
     }
 }

@@ -8,13 +8,18 @@ class Field {
     private val head = mutableListOf<Card>()
     private val bito = mutableListOf<Card>()
     private var alarm = false
-    fun createGame(p: List<Player>) {
-        fun createDeck() {
-            for (i in 0 until 4) {
-                for (j in 0 until 9) {
-                    val c = Card(i, j)
-                    deck.add(c)
-                }
+    private fun addDeck(c: List<Card>) {
+        deck.addAll(c)
+    }
+    fun createGame(p: List<Player>, c: MutableList<Card>) {
+        fun clearGame() {
+            deck.clear()
+            head.clear()
+            f.clear()
+            bito.clear()
+            for (i in p.indices) {
+                p[i].clearAttack()
+                p[i].clearHand()
             }
         }
         fun distribution() {
@@ -28,10 +33,18 @@ class Field {
             deck.removeAt(6*p.size)
             head[0].setSuit()
             deck.add(deck.size-1, head[0])
-            p[0].setAttacker()
+            if (p[0].isWinner() && !p[1].isWinner())
+                p[0].setAttacker()
+            else if (p[1].isWinner() && !p[0].isWinner())
+                p[1].setAttacker()
+            else
+                p[0].setAttacker()
+            p[0].clear()
+            p[1].clear()
             clearCard(p)
         }
-        createDeck()
+        clearGame()
+        addDeck(c)
         deck.shuffle()
         distribution()
     }
@@ -90,11 +103,11 @@ class Field {
         check()
         return f.isEmpty() || p.cardsInHand(i).isAllowed()
     }
-    fun emptyField(): Boolean {
-        return f.isEmpty()
-    }
     fun emptyDeck(): Boolean {
         return deck.isEmpty()
+    }
+    fun fieldSize(): Int {
+        return f.size
     }
     fun placeInField(p: Player, i: Int) {
         alarm = false
