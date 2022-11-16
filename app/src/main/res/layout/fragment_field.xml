@@ -53,14 +53,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="20dp"
-        android:width="40dp"
+        android:layout_marginEnd="16dp"
+        android:width="50dp"
         android:height="60dp"
-        android:lineSpacingExtra="10sp"
+        android:lineSpacingExtra="12sp"
         android:text=""
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.915"
+        app:layout_constraintHorizontal_bias="0.92"
         app:layout_constraintStart_toEndOf="@id/field1"
         app:layout_constraintTop_toBottomOf="@+id/opponent" />
 
@@ -129,6 +129,17 @@
         app:layout_constraintStart_toEndOf="@id/input"
         app:layout_constraintTop_toBottomOf="@+id/you" />
 
+    <Button
+        android:id="@+id/menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/menu"
+        app:layout_constraintEnd_toStartOf="@id/input"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@+id/you" />
+
     <TextView
         android:id="@+id/hint"
         android:layout_width="wrap_content"
@@ -140,5 +151,18 @@
         app:layout_constraintBottom_toTopOf="@+id/opponent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/win"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="20dp"
+        android:text="Hello World!"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/bito"
+        app:layout_constraintStart_toEndOf="@+id/menu"
+        app:layout_constraintTop_toBottomOf="@+id/you" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

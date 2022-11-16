@@ -10,7 +10,7 @@ class Player(private val i: Int) {
         return c.replace(",", "").replace("[", "").replace("]", "")
     }
     fun stringHand(): String {
-        hand.sortWith(compareBy({it.getSuit()},{it.getNom()}))
+        hand.sortWith(compareBy({it.getNom()},{it.getSuit()}))
         var x = ""
         if (i==0)
             return formatted(hand.toString())
@@ -54,7 +54,6 @@ class Player(private val i: Int) {
         return isWinner
     }
     fun winner() {
-        clearAttack()
         isWinner = true
     }
     fun clear() {

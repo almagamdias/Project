@@ -19,5 +19,9 @@
     <fragment
         android:id="@+id/fieldFragment"
         android:name="com.example.project.FieldFragment"
-        android:label="FieldFragment" />
+        android:label="FieldFragment" >
+        <action
+            android:id="@+id/action_fieldFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
+    </fragment>
 </navigation>

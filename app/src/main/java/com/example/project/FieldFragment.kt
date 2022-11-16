@@ -11,10 +11,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.example.project.cards.Card
 import com.example.project.field.Field
 import com.example.project.player.Player
-
 
 class FieldFragment : Fragment() {
     private val p1 = Player(0)
@@ -32,7 +32,7 @@ class FieldFragment : Fragment() {
         return d
     }
     private val cd = deck()
-    @SuppressLint("SetTextI18n", "MissingInflatedId", "ShowToast")
+    @SuppressLint("SetTextI18n", "MissingInflatedId", "ShowToast", "SuspiciousIndentation")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,7 +47,14 @@ class FieldFragment : Fragment() {
         val field1: TextView = bind.findViewById(R.id.field1)
         val field2: TextView = bind.findViewById(R.id.field2)
         val turn: TextView = bind.findViewById(R.id.turn)
+        val menu = bind.findViewById<Button>(R.id.menu)
         val bito = bind.findViewById<Button>(R.id.bito)
+        val win: TextView = bind.findViewById(R.id.win)
+        menu.visibility = View.GONE
+        win.visibility = View.GONE
+        menu.setOnClickListener(
+            Navigation.createNavigateOnClickListener(R.id.action_fieldFragment_to_menuFragment, null)
+        )
         field.createGame(p, cd)
         fun update() {
             if (!field.emptyHistory())
@@ -60,17 +67,20 @@ class FieldFragment : Fragment() {
             headSuit.text = field.getSuit() + " " + field.cardsLeft()
             if (field.emptyDeck()) {
                 headSuit.setTextColor(Color.WHITE)
-                gameOver(field1, field2)
+                gameOver(win, turn, menu, input)
             }
-            if (p2.isWinner() || p1.isWinner())
-                bito.text = "Again!"
             if (p2.isAttacker()==1) {
                 bito.text = "Take"
                 turn.text = "Defend!"
             }
-            else if (p1.isAttacker()==1){
+            else if (p1.isAttacker()==1) {
                 turn.text = "Your turn!"
                 bito.text = "Bito"
+            }
+            if (p2.isWinner() || p1.isWinner()) {
+                p1.clearAttack()
+                p2.clearAttack()
+                bito.text = "Again!"
             }
         }
         if (p1.isAttacker()==0) {
@@ -111,6 +121,9 @@ class FieldFragment : Fragment() {
                                 else if(p2.isWinner()) {
                                     hint.text = "You lose!"
                                 }
+                                else if(p1.isWinner() && p2.isWinner()) {
+                                    hint.text = "Draw!"
+                                }
                                 else
                                     hint.text = "Invalid integer!"
                             } catch (e: Exception) {
@@ -125,15 +138,25 @@ class FieldFragment : Fragment() {
             }
         })
         bito.setOnClickListener {
-            if (p2.isWinner() || p1.isWinner())
+            if (p2.isWinner() || p1.isWinner()) {
                 field.createGame(p, cd)
+                menu.visibility = View.GONE
+                turn.visibility = View.VISIBLE
+                input.visibility = View.VISIBLE
+                win.visibility = View.GONE
                 history.text = ""
-            if (p1.isAttacker()==0)
+                hint.text = ""
+                field1.text = ""
+                field2.text = ""
+            }
+            if (p1.isAttacker()==0) {
                 field.takeAllCards(p1, p)
-            else {
-                if (field.fieldSize()!=0)
+                input.text.clear()
+            } else {
+                if (field.fieldSize()!=0) {
                     field.bito(p)
-                else
+                    input.text.clear()
+                } else
                     hint.text = "You cannot bito!"
             }
             if (p1.isAttacker()==0)
@@ -143,15 +166,20 @@ class FieldFragment : Fragment() {
         return bind
     }
     @SuppressLint("SetTextI18n")
-    fun gameOver(t: TextView, t2: TextView) {
+    fun gameOver(t: TextView, t2: TextView, b: Button, inp: EditText) {
         for (i in p.indices) {
             if (p[i].handSize()==0) {
-                p[i].winner()
-                if (i==0)
-                    t.text = "You are Winner!"
-                else if (i==1)
-                    t.text = "Opponent is Winner!"
-                t2.text = ""
+                if (p[0].handSize()!=1) {
+                    p[i].winner()
+                    if (i==0)
+                        t.text = "You Win!"
+                    else if (i==1)
+                        t.text = "You Lose!"
+                }
+                t2.visibility = View.GONE
+                inp.visibility = View.GONE
+                b.visibility = View.VISIBLE
+                t.visibility = View.VISIBLE
             }
         }
         if (p1.isWinner() && p2.isWinner()) {
