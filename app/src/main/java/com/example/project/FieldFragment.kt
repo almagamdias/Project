@@ -49,9 +49,7 @@ class FieldFragment : Fragment() {
         val turn: TextView = bind.findViewById(R.id.turn)
         val menu = bind.findViewById<Button>(R.id.menu)
         val bito = bind.findViewById<Button>(R.id.bito)
-        val win: TextView = bind.findViewById(R.id.win)
         menu.visibility = View.GONE
-        win.visibility = View.GONE
         menu.setOnClickListener(
             Navigation.createNavigateOnClickListener(R.id.action_fieldFragment_to_menuFragment, null)
         )
@@ -67,7 +65,7 @@ class FieldFragment : Fragment() {
             headSuit.text = field.getSuit() + " " + field.cardsLeft()
             if (field.emptyDeck()) {
                 headSuit.setTextColor(Color.WHITE)
-                gameOver(win, turn, menu, input)
+                gameOver(menu, input)
             }
             if (p2.isAttacker()==1) {
                 bito.text = "Take"
@@ -81,6 +79,12 @@ class FieldFragment : Fragment() {
                 p1.clearAttack()
                 p2.clearAttack()
                 bito.text = "Again!"
+                if (p2.isWinner() && p1.isWinner())
+                    turn.text = "Draw!"
+                else if (p2.isWinner() && !p1.isWinner())
+                    turn.text = "You lose!"
+                else if (!p2.isWinner() && p1.isWinner())
+                    turn.text = "You win!"
             }
         }
         if (p1.isAttacker()==0) {
@@ -143,7 +147,6 @@ class FieldFragment : Fragment() {
                 menu.visibility = View.GONE
                 turn.visibility = View.VISIBLE
                 input.visibility = View.VISIBLE
-                win.visibility = View.GONE
                 history.text = ""
                 hint.text = ""
                 field1.text = ""
@@ -166,24 +169,15 @@ class FieldFragment : Fragment() {
         return bind
     }
     @SuppressLint("SetTextI18n")
-    fun gameOver(t: TextView, t2: TextView, b: Button, inp: EditText) {
+    fun gameOver(b: Button, inp: EditText) {
         for (i in p.indices) {
             if (p[i].handSize()==0) {
                 if (p[0].handSize()!=1) {
                     p[i].winner()
-                    if (i==0)
-                        t.text = "You Win!"
-                    else if (i==1)
-                        t.text = "You Lose!"
                 }
-                t2.visibility = View.GONE
                 inp.visibility = View.GONE
                 b.visibility = View.VISIBLE
-                t.visibility = View.VISIBLE
             }
-        }
-        if (p1.isWinner() && p2.isWinner()) {
-            t.text = "Draw!"
         }
     }
 }

@@ -13,6 +13,10 @@
         <action
             android:id="@+id/action_menuFragment_to_fieldFragment"
             app:destination="@id/fieldFragment"
+            app:popUpTo="@id/menuFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_guide"
+            app:destination="@id/guide"
             app:popUpTo="@id/menuFragment"
             app:popUpToInclusive="false" />
     </fragment>
@@ -22,6 +26,15 @@
         android:label="FieldFragment" >
         <action
             android:id="@+id/action_fieldFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/guide"
+        android:name="com.example.project.Guide"
+        android:label="fragment_guide"
+        tools:layout="@layout/fragment_guide" >
+        <action
+            android:id="@+id/action_guide_to_menuFragment"
             app:destination="@id/menuFragment" />
     </fragment>
 </navigation>

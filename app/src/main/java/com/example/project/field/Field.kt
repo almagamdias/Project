@@ -25,12 +25,12 @@ class Field {
         fun distribution() {
             for (i in 0 until 6) {
                 for (j in p.indices) {
-                    p[j].getCards(deck[i * 2 + j])
-                    deck.removeAt(i * 2 + j)
+                    p[j].getCards(deck[0])
+                    deck.removeAt(0)
                 }
             }
-            head.add(deck[6*p.size])
-            deck.removeAt(6*p.size)
+            head.add(deck[0])
+            deck.removeAt(0)
             head[0].setSuit()
             deck.add(deck.size-1, head[0])
             if (p[0].isWinner() && !p[1].isWinner())
@@ -41,7 +41,6 @@ class Field {
                 p[0].setAttacker()
             p[0].clear()
             p[1].clear()
-            clearCard(p)
         }
         clearGame()
         addDeck(c)

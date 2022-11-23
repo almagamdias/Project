@@ -1,168 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FieldFragment">
+    tools:context=".FieldFragment"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/history"
         android:width="375dp"
         android:height="80dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
         android:layout_marginBottom="20dp"
+        android:padding="8dp"
         android:text="@string/history"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/hint"
-        app:layout_constraintVertical_bias="0.95" />
-    <TextView
-        android:id="@+id/opponent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Hello World!"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/hint"
-        app:layout_constraintVertical_bias="0.927" />
-
-    <TextView
-        android:id="@+id/you"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="160dp"
-        android:text="Hello World!"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/field2" />
-
-    <TextView
-        android:id="@+id/head_suit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:width="50dp"
-        android:height="60dp"
-        android:lineSpacingExtra="12sp"
-        android:text=""
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.92"
-        app:layout_constraintStart_toEndOf="@id/field1"
-        app:layout_constraintTop_toBottomOf="@+id/opponent" />
-
-    <TextView
-        android:id="@+id/turn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="290dp"
-        android:text="@string/your_turn"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/input"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/you" />
-    <EditText
-        android:id="@+id/input"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="140dp"
-        android:autofillHints=""
-        android:hint="@string/hand"
-        android:inputType="number"
-        android:maxLength="2"
-        android:textColorHint="#78909C"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/you" />
-    <TextView
-        android:id="@+id/field1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="32dp"
-        android:width="300dp"
-        android:text=""
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/opponent" />
-    <TextView
-        android:id="@+id/field2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="12dp"
-        android:width="300dp"
-        android:text=""
-        android:textSize="20sp"
-        app:layout_constraintHorizontal_bias="0.063"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/field1" />
-
-    <Button
-        android:id="@+id/bito"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/bito"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@id/input"
-        app:layout_constraintTop_toBottomOf="@+id/you" />
-
-    <Button
-        android:id="@+id/menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/menu"
-        app:layout_constraintEnd_toStartOf="@id/input"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintTop_toBottomOf="@+id/you" />
-
+        android:textAlignment="center"/>
     <TextView
         android:id="@+id/hint"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:layout_marginEnd="160dp"
         android:layout_marginBottom="20dp"
         android:text="@string/hint"
-        app:layout_constraintBottom_toTopOf="@+id/opponent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
+        android:textAlignment="center"
+        android:textSize="20sp"/>
     <TextView
-        android:id="@+id/win"
+        android:id="@+id/opponent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:text=""
+        android:textSize="24sp"
+        android:textAlignment="center"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="20dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/field1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:width="320dp"
+                android:text=""
+                android:textSize="20sp"/>
+            <TextView
+                android:id="@+id/field2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="12dp"
+                android:width="320dp"
+                android:text=""
+                android:textSize="20sp"/>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/head_suit"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="10dp"
+            android:lineSpacingExtra="12sp"
+            android:text=""
+            android:textSize="20sp"/>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/you"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text=""
+        android:textSize="24sp"
+        android:textAlignment="center"/>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="20dp"
-        android:text="Hello World!"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/bito"
-        app:layout_constraintStart_toEndOf="@+id/menu"
-        app:layout_constraintTop_toBottomOf="@+id/you" />
+        android:orientation="horizontal"
+        android:layout_gravity="center">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:text="@string/menu"/>
+
+        <TextView
+            android:id="@+id/turn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/your_turn"
+            android:layout_marginEnd="10dp"
+            android:textSize="24sp"
+            android:textAlignment="center"/>
+
+        <EditText
+            android:id="@+id/input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:hint="@string/hand"
+            android:inputType="number"
+            android:maxLength="2"
+            android:textColorHint="#78909C"
+            android:textSize="24sp"
+            android:layout_marginEnd="10dp"/>
+
+        <Button
+            android:id="@+id/bito"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/bito" />
+    </LinearLayout>
+
+</LinearLayout>
