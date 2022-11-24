@@ -24,6 +24,10 @@ class MenuFragment : Fragment() {
         guide.setOnClickListener(
             Navigation.createNavigateOnClickListener(R.id.action_menuFragment_to_guide, null)
         )
+        val test = bind.findViewById<Button>(R.id.toTest)
+        test.setOnClickListener(
+            Navigation.createNavigateOnClickListener(R.id.action_menuFragment_to_test, null)
+        )
         return bind
     }
 }
