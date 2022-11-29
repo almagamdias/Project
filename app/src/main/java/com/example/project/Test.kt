@@ -1,29 +1,46 @@
 package com.example.project
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.SavedStateViewModelFactory
+import androidx.viewbinding.ViewBindings
 import com.example.project.cards.Card
+import com.example.project.databinding.FragmentTestBinding
 
 class Test : Fragment() {
+    private val st: Stats by viewModels()
+    @SuppressLint("MissingInflatedId", "SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val bind = inflater.inflate(R.layout.fragment_test, container, false)
-        val s: LinearLayout = bind.findViewById(R.id.spades)
+    ): View {
+        val binding: FragmentTestBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_test, container, false)
+        /*val s: LinearLayout = bind.findViewById(R.id.spades)
         deck(s, 0)
         val h: LinearLayout = bind.findViewById(R.id.hearts)
         deck(h, 1)
         val d: LinearLayout = bind.findViewById(R.id.diamonds)
         deck(d, 2)
         val c: LinearLayout = bind.findViewById(R.id.clubs)
-        deck(c, 3)
-        return bind
+        deck(c, 3)*/
+        binding.lifecycleOwner = this
+        st.setName()
+        st.win.observe(viewLifecycleOwner) { win ->
+            binding.stats.text = win.toString()
+        }
+        return binding.root
     }
     private fun deck(r: LinearLayout, i: Int): MutableList<Card> {
         val d = mutableListOf<Card>()
