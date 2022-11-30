@@ -14,11 +14,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <TextView
-                android:id="@+id/stats"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{@string/win(testModel.win)}"/>
+                android:orientation="horizontal"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/wins"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="26sp"
+                    android:layout_marginEnd="10dp"
+                    android:text=""/>
+                <TextView
+                    android:id="@+id/draws"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="26sp"
+                    android:layout_marginEnd="10dp"
+                    android:text=""/>
+                <TextView
+                    android:id="@+id/loses"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="26sp"
+                    android:text=""/>
+            </LinearLayout>
             <Button
                 android:id="@+id/add"
                 android:layout_width="wrap_content"
