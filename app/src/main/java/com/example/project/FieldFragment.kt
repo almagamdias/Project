@@ -11,12 +11,14 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.example.project.cards.Card
 import com.example.project.field.Field
 import com.example.project.player.Player
 
 class FieldFragment : Fragment() {
+    private val st: Stats by activityViewModels()
     private val p1 = Player(0)
     private val p2 = Player(1)
     private val p = listOf(p1, p2)
@@ -79,12 +81,18 @@ class FieldFragment : Fragment() {
                 p1.clearAttack()
                 p2.clearAttack()
                 bito.text = "Again!"
-                if (p2.isWinner() && p1.isWinner())
+                if (p2.isWinner() && p1.isWinner()) {
                     turn.text = "Draw!"
-                else if (p2.isWinner() && !p1.isWinner())
+                    st.plusDraw()
+                }
+                else if (p2.isWinner() && !p1.isWinner()) {
                     turn.text = "You lose!"
-                else if (!p2.isWinner() && p1.isWinner())
+                    st.plusLose()
+                }
+                else if (!p2.isWinner() && p1.isWinner()) {
                     turn.text = "You win!"
+                    st.plusWin()
+                }
             }
         }
         if (p1.isAttacker()==0) {

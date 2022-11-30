@@ -7,7 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
+import com.example.project.databinding.FragmentMenuBinding
 
 class MenuFragment : Fragment() {
     @SuppressLint("MissingInflatedId")
@@ -15,19 +19,17 @@ class MenuFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val bind = inflater.inflate(R.layout.fragment_menu, container, false)
-        val play = bind.findViewById<Button>(R.id.play)
-        play.setOnClickListener(
+        val bind: FragmentMenuBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_menu, container, false)
+        bind.lifecycleOwner = this
+        bind.play.setOnClickListener(
             Navigation.createNavigateOnClickListener(R.id.action_menuFragment_to_fieldFragment, null)
         )
-        val guide = bind.findViewById<Button>(R.id.toGuide)
-        guide.setOnClickListener(
+        bind.toGuide.setOnClickListener(
             Navigation.createNavigateOnClickListener(R.id.action_menuFragment_to_guide, null)
         )
-        val test = bind.findViewById<Button>(R.id.toTest)
-        test.setOnClickListener(
+        bind.toTest.setOnClickListener(
             Navigation.createNavigateOnClickListener(R.id.action_menuFragment_to_test, null)
         )
-        return bind
+        return bind.root
     }
 }

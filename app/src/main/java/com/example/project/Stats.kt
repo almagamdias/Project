@@ -24,4 +24,10 @@ class Stats(private val state: SavedStateHandle) : ViewModel() {
     fun plusLose() {
         _lose.value = _lose.value?.plus(1)
     }
+    fun sendData(item: Int) {
+        _win.value = item
+    }
+    fun getItem(): LiveData<Int> {
+        return win
+    }
 }

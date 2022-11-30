@@ -12,15 +12,17 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.SavedStateViewModelFactory
+import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBindings
 import com.example.project.cards.Card
 import com.example.project.databinding.FragmentTestBinding
 
 class Test : Fragment() {
-    private val st: Stats by viewModels{ SavedStateViewModelFactory()}
+    private val st: Stats by activityViewModels()
     @SuppressLint("MissingInflatedId", "SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,9 +38,6 @@ class Test : Fragment() {
         val c: LinearLayout = bind.findViewById(R.id.clubs)
         deck(c, 3)*/
         binding.lifecycleOwner = this
-        st.plusWin()
-        st.plusDraw()
-        st.plusLose()
         st.win.observe(viewLifecycleOwner) { win ->
             binding.wins.text = "Wins: $win"
         }
@@ -49,7 +48,7 @@ class Test : Fragment() {
             binding.loses.text = "Loses: $lose"
         }
         binding.add.setOnClickListener {
-            st.plusWin()
+            findNavController().navigate(R.id.action_test_to_menuFragment)
         }
         return binding.root
     }
