@@ -22,7 +22,7 @@ import com.example.project.cards.Card
 import com.example.project.databinding.FragmentTestBinding
 
 class Test : Fragment() {
-    private val st: Stats by activityViewModels()
+    private val st: Stats by activityViewModels{ SavedStateViewModelFactory()}
     @SuppressLint("MissingInflatedId", "SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,6 +46,9 @@ class Test : Fragment() {
         }
         st.lose.observe(viewLifecycleOwner) { lose ->
             binding.loses.text = "Loses: $lose"
+        }
+        st.history.observe(viewLifecycleOwner) { his ->
+            binding.his.text = his + "${st.len()}"
         }
         binding.add.setOnClickListener {
             findNavController().navigate(R.id.action_test_to_menuFragment)

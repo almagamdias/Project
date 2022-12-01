@@ -12,13 +12,14 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.SavedStateViewModelFactory
 import androidx.navigation.Navigation
 import com.example.project.cards.Card
 import com.example.project.field.Field
 import com.example.project.player.Player
 
 class FieldFragment : Fragment() {
-    private val st: Stats by activityViewModels()
+    private val st: Stats by activityViewModels{ SavedStateViewModelFactory() }
     private val p1 = Player(0)
     private val p2 = Player(1)
     private val p = listOf(p1, p2)
@@ -84,14 +85,17 @@ class FieldFragment : Fragment() {
                 if (p2.isWinner() && p1.isWinner()) {
                     turn.text = "Draw!"
                     st.plusDraw()
+                    st.addHis(1)
                 }
                 else if (p2.isWinner() && !p1.isWinner()) {
                     turn.text = "You lose!"
                     st.plusLose()
+                    st.addHis(2)
                 }
                 else if (!p2.isWinner() && p1.isWinner()) {
                     turn.text = "You win!"
                     st.plusWin()
+                    st.addHis(0)
                 }
             }
         }
@@ -182,9 +186,9 @@ class FieldFragment : Fragment() {
             if (p[i].handSize()==0) {
                 if (p[0].handSize()!=1) {
                     p[i].winner()
+                    inp.visibility = View.GONE
+                    b.visibility = View.VISIBLE
                 }
-                inp.visibility = View.GONE
-                b.visibility = View.VISIBLE
             }
         }
     }
