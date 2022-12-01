@@ -12,6 +12,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
@@ -20,6 +21,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBindings
 import com.example.project.cards.Card
 import com.example.project.databinding.FragmentTestBinding
+import kotlin.random.Random
 
 class Test : Fragment() {
     private val st: Stats by activityViewModels{ SavedStateViewModelFactory()}
@@ -48,7 +50,7 @@ class Test : Fragment() {
             binding.loses.text = "Loses: $lose"
         }
         st.history.observe(viewLifecycleOwner) { his ->
-            binding.his.text = his + "${st.len()}"
+            binding.his.text = his
         }
         binding.add.setOnClickListener {
             findNavController().navigate(R.id.action_test_to_menuFragment)

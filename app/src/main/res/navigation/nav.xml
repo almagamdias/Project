@@ -30,6 +30,15 @@
         <action
             android:id="@+id/action_fieldFragment_to_menuFragment"
             app:destination="@id/menuFragment" />
+        <action
+            android:id="@+id/action_fieldFragment_to_winFragment"
+            app:destination="@id/winFragment" />
+        <action
+            android:id="@+id/action_fieldFragment_to_drawFragment"
+            app:destination="@id/drawFragment" />
+        <action
+            android:id="@+id/action_fieldFragment_to_loseFragment"
+            app:destination="@id/loseFragment" />
     </fragment>
     <fragment
         android:id="@+id/guide"
@@ -49,4 +58,39 @@
             android:id="@+id/action_test_to_menuFragment"
             app:destination="@id/menuFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/winFragment"
+        android:name="com.example.project.WinFragment"
+        android:label="fragment_win"
+        tools:layout="@layout/fragment_win" >
+        <action
+            android:id="@+id/action_winFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
+        <action
+            android:id="@+id/action_winFragment_to_fieldFragment"
+            app:destination="@id/fieldFragment" />
+    </dialog>
+    <dialog
+        android:id="@+id/drawFragment"
+        android:name="com.example.project.DrawFragment"
+        android:label="fragment_draw"
+        tools:layout="@layout/fragment_draw" >
+        <action
+            android:id="@+id/action_drawFragment_to_fieldFragment"
+            app:destination="@id/fieldFragment" />
+        <action
+            android:id="@+id/action_drawFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
+    </dialog>
+    <dialog
+        android:id="@+id/loseFragment"
+        android:name="com.example.project.LoseFragment"
+        android:label="LoseFragment" >
+        <action
+            android:id="@+id/action_loseFragment_to_fieldFragment"
+            app:destination="@id/fieldFragment" />
+        <action
+            android:id="@+id/action_loseFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
+    </dialog>
 </navigation>
