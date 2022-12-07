@@ -1,19 +1,14 @@
 package com.example.project
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class Stats(private val state: SavedStateHandle) : ViewModel() {
-    companion object {
-        private const val k = "HIS"
-    }
-    private val ssh = state
+class Stats : ViewModel() {
     private var _win = MutableLiveData(0)
     private var _draw = MutableLiveData(0)
     private var _lose = MutableLiveData(0)
-    private var his = ssh.getLiveData(k, "")
+    private var his = MutableLiveData("")
     val win: LiveData<Int>
         get() = _win
     val draw: LiveData<Int>
@@ -40,13 +35,7 @@ class Stats(private val state: SavedStateHandle) : ViewModel() {
             2 -> his.value = his.value.plus(" L ")
         }
     }
-    fun len(): Int? {
+    private fun len(): Int? {
         return his.value?.length
-    }
-    fun save(s: String) {
-        ssh[k] = s
-    }
-    fun getU(): String {
-        return ssh[k] ?: ""
     }
 }

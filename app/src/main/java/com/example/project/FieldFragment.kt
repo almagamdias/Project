@@ -14,7 +14,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.SavedStateViewModelFactory
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import com.example.project.cards.Card
 import com.example.project.field.Field
 import com.example.project.player.Player
@@ -87,19 +86,16 @@ class FieldFragment : Fragment() {
                     turn.text = "Draw!"
                     st.plusDraw()
                     st.addHis(1)
-                    findNavController().navigate(R.id.action_fieldFragment_to_drawFragment)
                 }
                 else if (p2.isWinner() && !p1.isWinner()) {
                     turn.text = "You lose!"
                     st.plusLose()
                     st.addHis(2)
-                    findNavController().navigate(R.id.action_fieldFragment_to_loseFragment)
                 }
                 else if (!p2.isWinner() && p1.isWinner()) {
                     turn.text = "You win!"
                     st.plusWin()
                     st.addHis(0)
-                    findNavController().navigate(R.id.action_fieldFragment_to_winFragment)
                 }
             }
         }
