@@ -12,14 +12,13 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.SavedStateViewModelFactory
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.example.project.cards.Card
 import com.example.project.field.Field
 import com.example.project.player.Player
 
 class FieldFragment : Fragment() {
-    private val st: Stats by activityViewModels{ SavedStateViewModelFactory() }
+    private val st: Stats by activityViewModels()
     private val p1 = Player(0)
     private val p2 = Player(1)
     private val p = listOf(p1, p2)
@@ -53,9 +52,9 @@ class FieldFragment : Fragment() {
         val menu = bind.findViewById<Button>(R.id.menu)
         val bito = bind.findViewById<Button>(R.id.bito)
         menu.visibility = View.GONE
-        menu.setOnClickListener(
-            Navigation.createNavigateOnClickListener(R.id.action_fieldFragment_to_menuFragment, null)
-        )
+        menu.setOnClickListener {
+            findNavController().popBackStack()
+        }
         field.createGame(p, cd)
         fun update() {
             if (!field.emptyHistory())
@@ -64,12 +63,12 @@ class FieldFragment : Fragment() {
             you.text = p1.stringHand()
             field1.text = field.getField(0)
             field2.text = field.getField(1)
-            headSuit.setTextColor(Color.BLACK)
             headSuit.text = field.getSuit() + " " + field.cardsLeft()
             if (field.emptyDeck()) {
                 headSuit.setTextColor(Color.WHITE)
                 gameOver(menu, input)
             }
+            else headSuit.setTextColor(Color.BLACK)
             if (p2.isAttacker()==1) {
                 bito.text = "Take"
                 turn.text = "Defend!"

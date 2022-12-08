@@ -21,32 +21,22 @@
             app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_menuFragment_to_test"
-            app:destination="@id/test" />
+            app:destination="@id/test"
+            app:popUpTo="@id/menuFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/fieldFragment"
         android:name="com.example.project.FieldFragment"
-        android:label="FieldFragment" >
-        <action
-            android:id="@+id/action_fieldFragment_to_menuFragment"
-            app:destination="@id/menuFragment" />
-    </fragment>
+        android:label="FieldFragment" />
     <fragment
         android:id="@+id/guide"
         android:name="com.example.project.Guide"
         android:label="fragment_guide"
-        tools:layout="@layout/fragment_guide" >
-        <action
-            android:id="@+id/action_guide_to_menuFragment"
-            app:destination="@id/menuFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_guide" />
     <fragment
         android:id="@+id/test"
         android:name="com.example.project.Test"
         android:label="fragment_test"
-        tools:layout="@layout/fragment_test" >
-        <action
-            android:id="@+id/action_test_to_menuFragment"
-            app:destination="@id/menuFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_test" />
 </navigation>

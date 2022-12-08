@@ -36,6 +36,36 @@
                 android:layout_height="wrap_content"
                 android:textSize="32sp"
                 />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+                <Button
+                    android:id="@+id/green"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/green"
+                    style="?android:attr/buttonBarButtonStyle" />
+                <Button
+                    android:id="@+id/yellow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/yellow"
+                    style="?android:attr/buttonBarButtonStyle" />
+                <Button
+                    android:id="@+id/black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/black"
+                    style="?android:attr/buttonBarButtonStyle" />
+                <Button
+                    android:id="@+id/purple"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/purple"
+                    style="?android:attr/buttonBarButtonStyle" />
+            </LinearLayout>
             <Button
                 android:id="@+id/add"
                 android:layout_width="wrap_content"

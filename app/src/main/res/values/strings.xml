@@ -20,4 +20,8 @@
     <string name="guide">Guide</string>
     <string name="durak_game">Durak game!!!</string>
     <string name="stats">Stats</string>
+    <string name="yellow">Yellow</string>
+    <string name="black">Black</string>
+    <string name="green">Green</string>
+    <string name="purple">Purple</string>
 </resources>

@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 
 class Guide : Fragment() {
     @SuppressLint("MissingInflatedId")
@@ -17,9 +17,9 @@ class Guide : Fragment() {
     ): View? {
         val bind = inflater.inflate(R.layout.fragment_guide, container, false)
         val back = bind.findViewById<Button>(R.id.back)
-        back.setOnClickListener(
-            Navigation.createNavigateOnClickListener(R.id.action_guide_to_menuFragment, null)
-        )
+        back.setOnClickListener {
+            findNavController().popBackStack()
+        }
         return bind
     }
 }
