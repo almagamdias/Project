@@ -32,7 +32,7 @@ class Test : Fragment() {
             binding.loses.text = "Loses: $lose"
         }
         st.history.observe(viewLifecycleOwner) { his ->
-            binding.his.text = his
+            if(st.len()!=0) binding.his.text = his
         }
         binding.add.setOnClickListener {
             findNavController().popBackStack()

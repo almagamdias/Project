@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -34,6 +35,7 @@
                 android:id="@+id/his"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/history_of_games"
                 android:textSize="32sp"
                 />
             <LinearLayout
@@ -41,35 +43,45 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_horizontal">
+
                 <Button
                     android:id="@+id/green"
+                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/green"
-                    style="?android:attr/buttonBarButtonStyle" />
+                    android:textColor="#00838F" />
+
                 <Button
                     android:id="@+id/yellow"
+                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/yellow"
-                    style="?android:attr/buttonBarButtonStyle" />
+                    android:textColor="#00838F" />
+
                 <Button
                     android:id="@+id/black"
+                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/black"
-                    style="?android:attr/buttonBarButtonStyle" />
+                    android:textColor="#00838F" />
+
                 <Button
                     android:id="@+id/purple"
+                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/purple"
-                    style="?android:attr/buttonBarButtonStyle" />
+                    android:textColor="#00838F" />
             </LinearLayout>
             <Button
                 android:id="@+id/add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/back"/>
+                android:text="@string/back"
+                android:textColor="#000000"
+                tools:ignore="TextContrastCheck,TextContrastCheck" />
         </LinearLayout>
 </layout>

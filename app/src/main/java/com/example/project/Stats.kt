@@ -35,7 +35,7 @@ class Stats : ViewModel() {
             2 -> his.value = his.value.plus(" L ")
         }
     }
-    private fun len(): Int? {
+    fun len(): Int? {
         return his.value?.length
     }
 }

@@ -13,7 +13,8 @@
         <action
             android:id="@+id/action_menuFragment_to_fieldFragment"
             app:destination="@id/fieldFragment"
-            app:popUpTo="@id/menuFragment" />
+            app:popUpTo="@id/menuFragment"
+            app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_menuFragment_to_guide"
             app:destination="@id/guide"
@@ -23,7 +24,7 @@
             android:id="@+id/action_menuFragment_to_test"
             app:destination="@id/test"
             app:popUpTo="@id/menuFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/fieldFragment"

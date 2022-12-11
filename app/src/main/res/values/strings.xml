@@ -12,10 +12,6 @@
     <string name="hint">Enter to place card</string>
     <string name="history">History of bito cards</string>
     <string name="how_to_play">How to play?</string>
-    <string name="t1">Fool game (also known as Durak) is so popular in CIS. That is you should learn to play if you are beginner.</string>
-    <string name="t2">First of all it has 36 cards in deck. There are only one deck. Then after shuffling distribute to players (up to 6 cards to each player), and the next card is trump suit and lies opened, then deck lies over the trump card.</string>
-    <string name="t3">The game starts. First turn get the player if he has the smallest trump card(If you won, then you can turn first). If defender has a bigger by nominal card or trump(if an attacking card is not trump), he can defend, else took all cards in field. After that if attacker has cards with nominal equal to field cards, he can attack again, else all field cards is away from field(Bito) and Attacker/Defender is changed each other. After player has taken all field cards or away from it, they get cards from deck(First attacker, then defender) while the number of cards in hand is less than 6.</string>
-    <string name="t4">If the player has not any cards in hand and the deck is empty, he is winner. Then if there are only one player with cards, he is loser fool. But if the players has not cards, it is draw.</string>
     <string name="back">Back</string>
     <string name="guide">Guide</string>
     <string name="durak_game">Durak game!!!</string>
@@ -24,4 +20,6 @@
     <string name="black">Black</string>
     <string name="green">Green</string>
     <string name="purple">Purple</string>
+    <string name="there">There</string>
+    <string name="history_of_games">There are History of games</string>
 </resources>
