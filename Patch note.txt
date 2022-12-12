@@ -1,0 +1,227 @@
+1.0ex4.0
+-Added RecyclerView for GuideFragment
+-Deleted some buttons
+-Fixed nav bugs
+
+1.0ex3.2
+-Deleted saves
+-Added themes
+-Navigation works correctly
+
+1.0ex3.1
+-Deleted dialog, because of many bugs
+-Deleted many Frags
+
+1.0ex3.0
+-Added more fragments
+-Dialog menu
+
+1.0ex2.3
+-Added save, but it is not working
+
+1.0ex2.2
+-ViewModel worksNormally
+
+1.0ex2.1
+-Fixed bugs
+-Added more data
+
+1.0ex2
+-Added variables in XML
+-Added ViewModel for stats
+
+1.0ex1
+-Added images
+-Added Test button
+
+0.8.4
+-Fixed interfaces bugs
+-Added guide
+
+0.8.3
+-Reworks in interfaces
+-Added button to menu if game is over
+
+0.8.2
+-Completely removed unused fragments
+
+0.8.1
+-Some fragments are rewmoved
+-Reworks of creating game(clear states)
+-EmptyField is renamed to FieldSize(size instead of isEmpty)
+-Changes in interface
+
+0.8.0
+-Global rework of many methods
+-Some methods are removed
+-Formatted strings
+-PopUpTo in some fragments
+-Changes in Strings
+
+0.7.0
+-Added bito history
+-Field is more understandable
+-Removed unused symbols
+-Renamed text views correctly
+-Optimized processes
+-Fixed bot
+
+0.6.5
+-Interface is normalized
+-Added alarm for taking cards from field
+	-For displaying "Taken cards"
+-Temporary disabled first turn
+-Added deck count left
+
+0.6.4
+-Optimized processes
+
+0.6.3
+-Added text for turn
+
+0.6.2
+-Fixed winner/loser events
+-Fixed "empty deck" bug
+
+0.6.1
+-Fixed bugs and removed unused features
+-Added a winner fragment
+-Then events work correctly
+-Fixed deck empty crash
+
+0.6.0
+b1
+-Added set Allowed
+-Can beat then is working for defend
+-Rename of defend function to placebot
+-Added bito(removing field cards)
+-If you defend, bot is attacking you
+-Remove unused features
+b2
+-then bot is attckin correctly
+b3
+-Optmized processes
+b4
+-Then deck is correcly working
+-Added take all cards method
+-Reworked bito function
+b5
+-Removed unused functions
+-Added winner/loser events
+-Fixed a length of edit text(You can enter 2 digits, before it - 1)
+release
+-Correcting winner event
+-Fixed bugs
+-Correcting place bot
+
+0.5.1
+-Set attacker is added
+-Sorting cards
+-Correcting defend functions
+
+0.5.0
+b1
+-Added edit text (only integer) for moving cards
+	-But index is not work correctly
+	-Press enter to move
+-Added methods for Field(Place card and field cards to string)
+-Removed unused indexes in Player
+b2
+-Removed semicolons
+-Reworked edit text
+-Fixed a "double" move
+b3
+-Added handSize for field and player
+-Fixed a crash caused by edit text
+-Fixed bugs
+-Removed unused methods
+b4
+-Card is a just class(temporary)
+-Added defend function
+b5
+-Defend then work correctly
+b6
+-Added conditions for defending
+b7
+-Added allowed condition
+-Added check for comparing field and hand(Player)
+b8
+-Rework place function
+	-Added can beat function
+release
+-Added attacker variable for attack or defend
+-Fixed bugs
+
+0.4.3
+-Added more buttons
+	-All fragments can be navigated by buttons
+-Fixed bugs
+
+0.4.2
+-Deleted unused XMLs
+-Edited text for a Loser fragment
+
+0.4.1
+-Rework of XMLs
+	-Then all XMLs are fragments(except activity_main)
+	-All code in main activity moved to field fragment
+-Rework of gradle scripts
+	-Added navigation
+	-And others
+-Added navigation xml
+-Fixed bugs
+
+0.4.0
+-Added a headSuit(Козырь) and it's functions
+-Added text for headSuit, counting suit cards
+-Renaming for cardInHand()
+	-Then named as stringHand()
+-Then cardInHand() has another function
+
+0.3.1
+-Cancel changes of Field class in 0.2.1(except numOfPlayers())
+-Fixed bugs
+
+0.3.0
+-Rework of Card class
+	-You can see real suit and nominal of cards
+-Fixed a number of nominal and suit when distributing
+
+0.2.2
+-slightly reworked getPlayerCards()
+-slightly reworked cardsInHand()
+-Then you can see players cards after distribution.
+
+0.2.1
+-Added numOfPlayers()
+-Added a text2 in main XML
+-Slightly reworked Field class
+-Fixed bugs for getPlayerCards()
+
+0.2.0
+-Then you cam see a deck of cards
+-Added toString for Card class
+-Added showDeck(), getPlayerCards() for Field class
+-Added cardInHand() for Player class
+-Fixed a number of suits of Cards
+
+0.1.2
+-Field class is reworked
+	-createGame() has internal functions: createDeck() and distribution()
+	-And other changes
+-Added getCard() function for Player class
+-Fixed bugs
+
+0.1.1
+-Added classes: Card, Field, Player
+	-Card is a data class
+	-Field has only a createGame() function
+	-Player has 4 data fields and 4 functions
+-Fixed bugs
+
+0.1.0
+-Durak game (Early access)
+-Added loser, field, menu XMLs
+-Added buttons:
+	-Menu: Play
+	-Field: Bito
